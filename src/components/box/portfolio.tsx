@@ -81,15 +81,15 @@ export default function Portfolio({id, title, desc, src, owner, hash, url, manag
                             </a>
                             </Typography>
                         </div>
-                        {/*<div className="flex flex-col mt-2">*/}
-                        {/*    <Typography variant={'small'} className={'font-bold'}>*/}
-                        {/*        Loyiha haqida:*/}
-                        {/*    </Typography>*/}
-                        {/*    <Typography variant={'small'} className={'flex font-medium'} onClick={toggleDesc}>*/}
-                        {/*        /!*{isDesc ? desc : desc.substring(0, 50) + (isDesc ? '' : "...")}*!/*/}
-                        {/*        {desc}*/}
-                        {/*    </Typography>*/}
-                        {/*</div>*/}
+                        <div className="flex flex-col mt-2">
+                            <Typography variant={'small'} className={'font-bold'}>
+                                Loyiha haqida:
+                            </Typography>
+                            <Typography variant={'small'} className={'flex font-medium'} onClick={toggleDesc}>
+                                {/*{isDesc ? desc : desc.substring(0, 50) + (isDesc ? '' : "...")}*/}
+                                {desc}
+                            </Typography>
+                        </div>
                     </div>
 
                     <div className="">
