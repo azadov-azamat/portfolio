@@ -5,9 +5,9 @@ import {BsGithub, BsInstagram, BsTelegram} from "react-icons/bs";
 export default function Footer() {
 
     return (
-        <footer className={"flex justify-between border-t w-full py-4 xl:px-20 px-10"}>
+        <footer className={"flex justify-between border-t w-full p-4"}>
             <div className="">
-                ©2023 - Azamat Azadov
+                ©2023 - A.A Zafar o'g'li
             </div>
             <div className="flex gap-3">
                 <a target={"_blank"} href="https://github.com/azadov-azamat">
