@@ -12,6 +12,7 @@ import guzarp from "../../assets/guzarpost.jpg";
 import modme from "../../assets/modme.png";
 import sam from "../../assets/sammi.png";
 import top from "../../assets/topilmalar.png";
+import {Typography} from "@material-tailwind/react";
 
 export default function Home() {
 
@@ -158,7 +159,7 @@ export default function Home() {
 
     return (
         <div>
-            <PageTitle title={"Portfolio"}/>
+            <PageTitle title={"Qilingan ishlar"}/>
             <section
                 className={'w-full grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2  grid-cols-1 justify-center gap-5 mt-5'}>
                 {
@@ -181,6 +182,12 @@ export default function Home() {
                     />)
                 }
             </section>
+            <div className="w-full flex flex-col items-center my-5 gap-2">
+                <a href="https://github.com/azadov-azamat" target={"_blank"} className={"border rounded px-10 py-1 font-bold"}>Github</a>
+                <Typography variant={'paragraph'} className={""}>
+                    Github orqali ko'plab qilingan ishlarni ko'rishingiz mumkin
+                </Typography>
+            </div>
         </div>
     );
 }

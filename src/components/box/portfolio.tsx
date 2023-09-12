@@ -1,4 +1,3 @@
-import React from 'react';
 
 import {PortfolioDataProps} from "../../interface/redux/variable.interface.ts";
 import {Card, CardBody, Typography} from "@material-tailwind/react";
@@ -7,9 +6,6 @@ import {LazyLoadImage} from 'react-lazy-load-image-component';
 
 export default function Portfolio({id, title, desc, src, owner, hash, url, manager, position, start_date, final_date, status}: PortfolioDataProps) {
 
-    const [isDesc, setDesc] = React.useState<boolean>(false)
-    const toggleDesc = () => setDesc(!isDesc)
-    console.log(desc, toggleDesc)
     return (
         <div id={String(id)} className={""}>
             <Card>
@@ -57,7 +53,7 @@ export default function Portfolio({id, title, desc, src, owner, hash, url, manag
                         </div>
                         <div className="flex gap-2 items-center">
                             <Typography variant={'small'} className={'font-bold'}>
-                                Loyiha vaqti:
+                                Vaqt:
                             </Typography>
                             <Typography variant={'small'} className={'font-medium'}>
                                 {start_date} - {final_date}
@@ -65,7 +61,7 @@ export default function Portfolio({id, title, desc, src, owner, hash, url, manag
                         </div>
                         <div className="flex gap-2 items-center">
                             <Typography variant={'small'} className={'font-bold'}>
-                                Loyiha holat:
+                                Holat:
                             </Typography>
                             <Typography variant={'small'} className={`font-medium text-white rounded px-1 ${status ? 'bg-green-500' : 'bg-red-500'}`}>
                                 {status ? 'Aktiv' : "Aktiv emas"}
@@ -73,7 +69,7 @@ export default function Portfolio({id, title, desc, src, owner, hash, url, manag
                         </div>
                         <div className="flex gap-2 items-center">
                             <Typography variant={'small'} className={'font-bold'}>
-                                Loyiha manzili:
+                               Manzili:
                             </Typography>
                             <Typography variant={'small'} className={'flex items-center gap-2 font-medium'}>
                                 {url} <a href={`https://${url}`} target={"_blank"}>
@@ -85,7 +81,7 @@ export default function Portfolio({id, title, desc, src, owner, hash, url, manag
                             <Typography variant={'small'} className={'font-bold'}>
                                 Loyiha haqida:
                             </Typography>
-                            <Typography variant={'small'} className={'flex font-medium'} onClick={toggleDesc}>
+                            <Typography variant={'small'} className={'flex font-medium'} >
                                 {/*{isDesc ? desc : desc.substring(0, 50) + (isDesc ? '' : "...")}*/}
                                 {desc}
                             </Typography>
