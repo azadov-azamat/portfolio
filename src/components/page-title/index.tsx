@@ -10,7 +10,7 @@ export default function PageTitle({title}: PageTitleProps) {
         <div className="w-full h-auto flex justify-center items-center border-b-2 border-white">
             <Typography
                 variant="h2"
-                className={"text-4xl font-bold"}
+                className={"text-3xl font-bold"}
             >
                 {title}
             </Typography>
