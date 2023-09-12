@@ -14,7 +14,7 @@ export default function Portfolio({id, title, desc, src, owner, hash, url, manag
         <div id={String(id)} className={""}>
             <Card>
                 <CardBody className={'rounded flex flex-col p-3 border'}>
-                    <LazyLoadImage effect={"blur"}
+                    <LazyLoadImage effect={"black-and-white"}
                                    className={"w-full h-auto object-cover object-center"} alt={title}
                                    src={src}
                     />
