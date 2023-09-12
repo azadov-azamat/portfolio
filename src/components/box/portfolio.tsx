@@ -3,6 +3,7 @@ import React from 'react';
 import {PortfolioDataProps} from "../../interface/redux/variable.interface.ts";
 import {Card, CardBody, Typography} from "@material-tailwind/react";
 import {BiLinkExternal} from "react-icons/bi";
+import {LazyLoadImage} from 'react-lazy-load-image-component';
 
 export default function Portfolio({id, title, desc, src, owner, hash, url, manager, position, start_date, final_date, status}: PortfolioDataProps) {
 
@@ -13,10 +14,9 @@ export default function Portfolio({id, title, desc, src, owner, hash, url, manag
         <div id={String(id)} className={""}>
             <Card>
                 <CardBody className={'rounded flex flex-col p-3 border'}>
-                    <img
-                        className="w-full h-auto object-cover object-center"
-                        src={src}
-                        alt={title}
+                    <LazyLoadImage effect={"blur"}
+                                   className={"w-full h-auto object-cover object-center"} alt={title}
+                                   src={src}
                     />
 
                     <div className="my-2 gap-2 overflow-hidden">
