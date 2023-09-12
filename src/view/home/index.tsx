@@ -184,7 +184,7 @@ export default function Home() {
             </section>
             <div className="w-full flex flex-col items-center my-5 gap-2">
                 <a href="https://github.com/azadov-azamat" target={"_blank"} className={"border border-black rounded px-10 py-1 font-bold"}>Github</a>
-                <Typography variant={'paragraph'} className={""}>
+                <Typography variant={'paragraph'} className={"text-center"}>
                     Github orqali ko'plab qilingan ishlarni ko'rishingiz mumkin
                 </Typography>
             </div>
