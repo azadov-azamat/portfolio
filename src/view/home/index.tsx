@@ -13,6 +13,7 @@ import modme from "../../assets/modme.png";
 import sam from "../../assets/sammi.png";
 import top from "../../assets/topilmalar.png";
 import realtor from "../../assets/77kv.png";
+import market from "../../assets/market-lochin.png";
 import {Typography} from "@material-tailwind/react";
 
 export default function Home() {
@@ -32,6 +33,21 @@ export default function Home() {
             final_date: "01/06/2024",
             status: true,
             manager: "Begzod Hayitboyev"
+        },
+        {
+            id: 11,
+            title: "Market Lochin",
+            desc: "Qurilish mollari do'koni uchun ichki sistema, bunda do'kon egasi mahsulotlari haqida umumiy barcha ma'lumotlarni ko'rib borishi, kirim-chiqim summalarini online dashboard orqali ko'rishi" +
+                "mahsulotlatning statistikalari haqida ma'lumot olib borishi uchun shaxsiy loyiha",
+            src: market,
+            owner: "Shaxsiy loyiha",
+            hash: ["Vite Js", "Redux", "Redux-toolkit", "tailwindcss", "material-tailwind"],
+            position: "Frontend Developer",
+            url: "marketlochin.uz",
+            start_date: "01/09/2023",
+            final_date: "01/11/2023",
+            status: true,
+            manager: "Jamshid Kalandarov"
         },
         {
             id: 3,
