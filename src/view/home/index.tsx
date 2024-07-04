@@ -12,11 +12,27 @@ import guzarp from "../../assets/guzarpost.jpg";
 import modme from "../../assets/modme.png";
 import sam from "../../assets/sammi.png";
 import top from "../../assets/topilmalar.png";
+import realtor from "../../assets/77kv.png";
 import {Typography} from "@material-tailwind/react";
 
 export default function Home() {
 
     const portfolioData: PortfolioDataProps[] = [
+        {
+            id: 10,
+            title: "77kv",
+            desc: "Loyiha realtor va agentlar uchun mo'ljallangan bo'lib, asosan turar va noturar uy joy e'lonlari joylanib boriladi. Realtorlar bemalol telegram akkountlari va olx.uz saytidagi" +
+                "akkountlarini biriktirgan holda tez va qulay platformadan foydalanishadi",
+            src: realtor,
+            owner: "Big Tech",
+            hash: ["Ember js", "Ember Data", "Google api", "Open AI", "GPT 4", "Telegram integrate", "bootstrap", "Node Js", "Express Js", "Postgresql"],
+            position: "Full-stack Developer",
+            url: "77kv.uz",
+            start_date: "01/12/2023",
+            final_date: "01/06/2024",
+            status: true,
+            manager: "Begzod Hayitboyev"
+        },
         {
             id: 3,
             title: "Depository",
@@ -183,7 +199,8 @@ export default function Home() {
                 }
             </section>
             <div className="w-full flex flex-col items-center my-5 gap-2">
-                <a href="https://github.com/azadov-azamat" target={"_blank"} className={"border border-black rounded px-10 py-1 font-bold"}>Github</a>
+                <a href="https://github.com/azadov-azamat" target={"_blank"}
+                   className={"border border-black rounded px-10 py-1 font-bold"}>Github</a>
                 <Typography variant={'paragraph'} className={"text-center"}>
                     Github orqali ko'plab qilingan ishlarni ko'rishingiz mumkin
                 </Typography>
