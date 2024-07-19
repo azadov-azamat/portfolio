@@ -1,7 +1,7 @@
 // import React from 'react';
 
 import PageTitle from "../../components/page-title";
-import {PortfolioDataProps} from "../../interface/redux/variable.interface.ts";
+import {OfficesDataProps, PortfolioDataProps} from "../../interface/redux/variable.interface.ts";
 import Portfolio from "../../components/box/portfolio.tsx";
 import s_justice from "../../assets/smart-adliya.png";
 import depos from "../../assets/depository.png";
@@ -14,7 +14,12 @@ import sam from "../../assets/sammi.png";
 import top from "../../assets/topilmalar.png";
 import realtor from "../../assets/77kv.png";
 import market from "../../assets/market-lochin.png";
+import bigTech from "../../assets/big-tech.png";
+
 import {Typography} from "@material-tailwind/react";
+import OfficeComponent from "../../components/box/office.tsx";
+import { Swiper, SwiperSlide } from 'swiper/react';
+
 
 export default function Home() {
 
@@ -189,10 +194,84 @@ export default function Home() {
         }
     ]
 
+    const officeData: OfficesDataProps[] = [
+        {
+            id: 1,
+            title: "Napa Automotive",
+            desc: "",
+            src: "https://it-market.uz/media-django/__sized__/logos/Logo_NAPA_Automotive-thumbnail-128x128-90.jpeg",
+            owner: "Umid Abdusattorov"
+        },
+        {
+            id: 2,
+            title: "Davlat Xizmatlar Agentligi",
+            desc: "",
+            owner: "",
+            src: "https://static8.tgstat.ru/channels/_0/e0/e06c9abc54703ce47dbf2eb40538a46d.jpg"
+        },
+        {
+            id: 3,
+            title: "Adliya Vazirligi (AKTRM)",
+            desc: "",
+            src: "https://huquqiyportal.uz/_nuxt/img/adliya-logo.c5f976c.png",
+            owner: ""
+        },
+        {
+            id: 4,
+            title: "Kervanyol technologies",
+            desc: "",
+            src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDN56czZUUpMzgW4KrIGHOmRUJRJ3dZYfFhA&s",
+            owner: "",
+        },
+        {
+            id: 5,
+            title: "Big technologies",
+            desc: "",
+            owner: "Begzod Hayitboyev",
+            src: bigTech
+        }
+    ]
+
     return (
         <div>
-            <PageTitle title={"Qilingan ishlar"}/>
-            <section
+            <PageTitle title={"Ish joylarim"}/>
+
+            <section className={'mb-3'}>
+                <Swiper
+                    slidesPerView={1}
+                    spaceBetween={10}
+                    speed={3000}
+                    loop={true}
+                    autoplay={true}
+                    onSlideChange={() => console.log('slide change')}
+                    onSwiper={(swiper) => console.log(swiper)}
+                    breakpoints={{
+                        640: {
+                            slidesPerView: 2,
+                            spaceBetween: 20,
+                        },
+                        768: {
+                            slidesPerView: 4,
+                            spaceBetween: 40,
+                        },
+                        1024: {
+                            slidesPerView: 5,
+                            spaceBetween: 50,
+                        },
+                    }}
+                >
+                    {
+                        officeData.map((office, key) =>
+                            <SwiperSlide key={key}>
+                                <OfficeComponent {...office}/>
+                            </SwiperSlide>
+                        )
+                    }
+            </Swiper>
+        </section>
+
+    <PageTitle title={"Qilingan ishlar"}/>
+    <section
                 className={'w-full grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2  grid-cols-1 justify-center gap-5 mt-5'}>
                 {
                     portfolioData.map(({

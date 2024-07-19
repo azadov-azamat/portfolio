@@ -19,6 +19,14 @@ export interface PortfolioDataProps {
     status: boolean;
 }
 
+export interface OfficesDataProps {
+    id: number,
+    title: string,
+    desc: string,
+    src: string,
+    owner: string,
+}
+
 export interface userDataProps {
     full_name: string;
     birthdate: string;

@@ -3,6 +3,7 @@ import {Route, Routes} from "react-router-dom";
 import {routes} from "./config/constants.ts";
 import Layout from "./layout/layout.tsx";
 import './index.css'
+import 'swiper/css';
 
 function App() {
 
