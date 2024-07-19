@@ -238,7 +238,7 @@ export default function Home() {
 
             <section className={'mb-3'}>
                 <Swiper
-                    slidesPerView={1}
+                    slidesPerView={1.5}
                     spaceBetween={10}
                     speed={3000}
                     loop={true}
@@ -247,15 +247,15 @@ export default function Home() {
                     onSwiper={(swiper) => console.log(swiper)}
                     breakpoints={{
                         640: {
-                            slidesPerView: 2,
+                            slidesPerView: 2.5,
                             spaceBetween: 20,
                         },
                         768: {
-                            slidesPerView: 4,
+                            slidesPerView: 4.5,
                             spaceBetween: 40,
                         },
                         1024: {
-                            slidesPerView: 5,
+                            slidesPerView: 5.5,
                             spaceBetween: 50,
                         },
                     }}
