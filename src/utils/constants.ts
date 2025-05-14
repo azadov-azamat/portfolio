@@ -203,7 +203,7 @@ export const officeData: OfficesDataProps[] = [
     },
     {
         id: 5,
-        title: "Big technologies",
+        title: "Banerma",
         desc: "",
         owner: "Begzod Hayitboyev",
         src: '/images/big-tech.png'
