@@ -8,7 +8,7 @@ export const portfolioData: PortfolioDataProps[] = [
         desc: "Loyiha realtor va agentlar uchun mo'ljallangan bo'lib, asosan turar va noturar uy joy e'lonlari joylanib boriladi. Realtorlar bemalol telegram akkountlari va olx.uz saytidagi" +
             "akkountlarini biriktirgan holda tez va qulay platformadan foydalanishadi",
         src: '/images/77kv.png',
-        owner: "Big Tech",
+        owner: "Banerma Group",
         hash: ["Ember js", "Ember Data", "Google api", "Open AI", "GPT 4", "Telegram integrate", "bootstrap", "Node Js", "Express Js", "Postgresql"],
         position: "Full-stack Developer",
         url: "77kv.uz",
@@ -31,6 +31,20 @@ export const portfolioData: PortfolioDataProps[] = [
         final_date: "01/11/2023",
         status: true,
         manager: "Jamshid Kalandarov"
+    },
+    {
+        id: 12,
+        title: "JDM PRO",
+        desc: "Saytda yaponiya moshinalarining elonlari joylashtiriladi, saytning oldingi ko'rinishi upgrade qilindi. hosting ftp dan vercega ko'chirildi. bu bilan ishlash tezligi oshdi, email pochtaga boruvchi habarlarning dizayni o'zgartirildi, performanse va ceo to'g'irlandi va oshirildi",
+        src: '/images/jdm.png',
+        owner: "Feruz narziev",
+        hash: ["nextjs", "typescript", "tailwindcss", "strapi.io"],
+        position: "Full-stack Developer",
+        url: "jdm-pro.com",
+        start_date: "01/06/2025",
+        final_date: "15/01/2025",
+        status: true,
+        manager: "Banerma Group"
     },
     {
         id: 3,
