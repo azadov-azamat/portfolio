@@ -128,6 +128,7 @@ function ProjectCard({ project }: any) {
         <img
           src={project.src || "/placeholder.svg"}
           alt={project.title}
+          loading="lazy"
           className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute top-3 right-3">
@@ -183,7 +184,7 @@ function ProjectCard({ project }: any) {
           </div>
         )}
 
-        <p className="text-sm line-clamp-2 text-slate-600 dark:text-slate-400">{project.desc}</p>
+        <p className="text-sm line-clamp-4 text-slate-600 dark:text-slate-400">{project.desc}</p>
       </div>
 
       <div className="px-4 pb-4 pt-0 flex flex-wrap gap-1.5">
