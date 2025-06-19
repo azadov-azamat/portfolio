@@ -1,5 +1,4 @@
 import {LayoutProps} from "./layout.props";
-// import Footer from "../components/footer";
 
 function Layout({children}: LayoutProps): JSX.Element {
 
