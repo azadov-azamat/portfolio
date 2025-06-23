@@ -3,6 +3,20 @@ import { OfficesDataProps, PortfolioDataProps } from "../interface/redux/variabl
 
 export const portfolioData: PortfolioDataProps[] = [
     {
+        id: 12,
+        title: "JDM PRO",
+        desc: "Saytda yaponiya moshinalarining elonlari joylashtiriladi, saytning oldingi ko'rinishi upgrade qilindi. hosting ftp dan vercega ko'chirildi. bu bilan ishlash tezligi oshdi, email pochtaga boruvchi habarlarning dizayni o'zgartirildi, performanse va ceo to'g'irlandi va oshirildi",
+        src: '/images/jdm.png',
+        owner: "Feruz narziev",
+        hash: ["nextjs", "typescript", "tailwindcss", "strapi.io"],
+        position: "Full-stack Developer",
+        url: "jdm-pro.com",
+        start_date: "01/06/2025",
+        final_date: "15/01/2025",
+        status: true,
+        manager: "Banerma Group"
+    },
+    {
         id: 10,
         title: "77kv",
         desc: "Loyiha realtor va agentlar uchun mo'ljallangan bo'lib, asosan turar va noturar uy joy e'lonlari joylanib boriladi. Realtorlar bemalol telegram akkountlari va olx.uz saytidagi" +
@@ -31,20 +45,6 @@ export const portfolioData: PortfolioDataProps[] = [
         final_date: "01/11/2023",
         status: true,
         manager: "Jamshid Kalandarov"
-    },
-    {
-        id: 12,
-        title: "JDM PRO",
-        desc: "Saytda yaponiya moshinalarining elonlari joylashtiriladi, saytning oldingi ko'rinishi upgrade qilindi. hosting ftp dan vercega ko'chirildi. bu bilan ishlash tezligi oshdi, email pochtaga boruvchi habarlarning dizayni o'zgartirildi, performanse va ceo to'g'irlandi va oshirildi",
-        src: '/images/jdm.png',
-        owner: "Feruz narziev",
-        hash: ["nextjs", "typescript", "tailwindcss", "strapi.io"],
-        position: "Full-stack Developer",
-        url: "jdm-pro.com",
-        start_date: "01/06/2025",
-        final_date: "15/01/2025",
-        status: true,
-        manager: "Banerma Group"
     },
     {
         id: 3,
@@ -107,53 +107,22 @@ export const portfolioData: PortfolioDataProps[] = [
         status: true,
         manager: "Kamoliddin Xojayev"
     },
-    {
-        id: 7,
-        title: "Modme - clone",
-        desc: "Loyiha Digital Dreams firmasi tomonidan test sinovi ko'rinishida, amaldagi modme.uz platformasing nusxasini yasash maqsadida topshirilgan." +
-            " Loyihaning frontend qismida ish olib bordim va to'liq typescript dasturlash tilida ko'tarilgan. Loyiha muvoffaqiyatli yakunlangan!",
-        src: '/images/modme.png',
-        owner: "Digital Dreams LLC",
-        hash: ["react-js", "vite-js", "redux", "redux-toolkit", "material-tailwind", "tailwindcss", "mobiscroll", "sms-shlyuz", "dnd", "typescript"],
-        position: "Frontend Developer",
-        url: "modme-crm.vercel.app",
-        start_date: "01/02/2023",
-        final_date: "10/02/2023",
-        status: false,
-        manager: "Ziyodulla"
-    },
-    {
-        id: 4,
-        title: "Dilhush - restorani",
-        src: '/images/dilhush.jpg',
-        desc: "Digital Dreams firmasi tomonidan berilgan ushbu loyiha \"Dilhush - oilaviy restoran\" uchun boshqaruv bo'limini yasash maqsad qilingan. " +
-            "Loyiha yordamida mobil programma orqali berilgan buyurtmalarni ko'rib borish, mobil programma restoran menyularini doimiy yangilab borish imkoniyatini beradi. " +
-            "Loyihaning frontend qismida ish olib bordim va to'liq typescript dasturlash tilida ko'tarilgan. Loyiha muvoffaqiyatli tugatilgan!",
-        owner: "Digital Dreams LLC",
-        hash: ["react-js", "redux", "redux-toolkit", "socket.io", "material-tailwind", "tailwindcss", "typescript"],
-        position: "Frontend Developer",
-        url: "dilhush-admin.vercel.app",
-        start_date: "01/05/2023",
-        final_date: "01/08/2023",
-        status: true,
-        manager: "Ziyodulla"
-    },
-    {
-        id: 6,
-        title: "Guzarpost",
-        desc: "Loyiha biron-bir mijozning online sotib olgan ashyolarini Turkiya davlatidan O'zbekistonga olib kelib berish imkoniyatini beradi. " +
-            "Va shaxsiy kabinet orqali o'z yuklarini tracking qismini ko'rib borishi mumkin. Loyihaning frontend qismida ish olib bordim va to'liq typescript dasturlash tilida ko'tarilgan. " +
-            "Loyiha muvoffaqiyatli tugatilgan!",
-        src: '/images/guzarpost.jpg',
-        owner: "Kervanyul Technologies",
-        hash: ["react-js", "vite-js", "redux", "redux-toolkit", "material-tailwind", "tailwindcss", "typescript", "one-id", "jivo-chat"],
-        position: "Frontend Developer",
-        url: "guzarpost.uz",
-        start_date: "20/05/2023",
-        final_date: "01/09/2023",
-        status: true,
-        manager: "Bexruz Muzaffarov"
-    },
+    // {
+    //     id: 6,
+    //     title: "Guzarpost",
+    //     desc: "Loyiha biron-bir mijozning online sotib olgan ashyolarini Turkiya davlatidan O'zbekistonga olib kelib berish imkoniyatini beradi. " +
+    //         "Va shaxsiy kabinet orqali o'z yuklarini tracking qismini ko'rib borishi mumkin. Loyihaning frontend qismida ish olib bordim va to'liq typescript dasturlash tilida ko'tarilgan. " +
+    //         "Loyiha muvoffaqiyatli tugatilgan!",
+    //     src: '/images/guzarpost.jpg',
+    //     owner: "Kervanyul Technologies",
+    //     hash: ["react-js", "vite-js", "redux", "redux-toolkit", "material-tailwind", "tailwindcss", "typescript", "one-id", "jivo-chat"],
+    //     position: "Frontend Developer",
+    //     url: "guzarpost.uz",
+    //     start_date: "20/05/2023",
+    //     final_date: "01/09/2023",
+    //     status: true,
+    //     manager: "Bexruz Muzaffarov"
+    // },
     {
         id: 5,
         title: "EximERP",
@@ -169,20 +138,6 @@ export const portfolioData: PortfolioDataProps[] = [
         status: true,
         final_date: "01/09/2023",
         manager: "Bexruz Muzaffarov"
-    },
-    {
-        id: 8,
-        title: "Blog sayt",
-        desc: "Samar Badriddinovning nextjs ga asoslangan darslarini mustahkamlash maqsadida qilingan amaliy ish!",
-        src: '/images/sammi.png',
-        owner: "Self Study",
-        hash: ["react-js", "next-js", "material-ui", "graphql", "sql", "ssr", "seo", "typescript"],
-        position: "Frontend Developer",
-        url: "nextjs-tutorial-kohl.vercel.app",
-        start_date: "10/03/2023",
-        final_date: "20/03/2023",
-        status: false,
-        manager: "Samar Badriddinov"
     }
 ]
 
