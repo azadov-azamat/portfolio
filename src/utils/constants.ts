@@ -7,7 +7,7 @@ export const portfolioData: PortfolioDataProps[] = [
         title: "JDM PRO",
         desc: "Saytda yaponiya moshinalarining elonlari joylashtiriladi, saytning oldingi ko'rinishi upgrade qilindi. hosting ftp dan vercega ko'chirildi. bu bilan ishlash tezligi oshdi, email pochtaga boruvchi habarlarning dizayni o'zgartirildi, performanse va ceo to'g'irlandi va oshirildi",
         src: '/images/jdm.png',
-        owner: "Feruz narziev",
+        owner: "Feruz Narziev",
         hash: ["nextjs", "typescript", "tailwindcss", "strapi.io"],
         position: "Full-stack Developer",
         url: "jdm-pro.com",
@@ -15,6 +15,21 @@ export const portfolioData: PortfolioDataProps[] = [
         final_date: "15/01/2025",
         status: true,
         manager: "Banerma Group"
+    },
+    {
+        id: 13,
+        title: "Yukon Uz",
+        desc: "Loyihaning asosiy maqsadi yuk va moshina egalariga kerakli bo'lgan elonlarni telegram kanallardan tezda topib berishdan iborat. Loyiha web, telegram-bot va android app larga ega sistema",
+        src: '/images/yukon.png',
+        owner: "Banerma Group",
+        telegram: "t.me/yuk_uz_logistika_bot",
+        hash: ["Ember js", "Ember Data", "Google api", "Open AI", "GPT 4", "Telegram Bot", "bootstrap", "Node Js", "Express Js", "Postgresql"],
+        position: "Full-stack Developer",
+        url: "yukon.uz",
+        start_date: "01/09/2024",
+        final_date: "01/06/2025",
+        status: true,
+        manager: "Begzod Hayitboyev"
     },
     {
         id: 10,

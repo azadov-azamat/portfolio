@@ -8,7 +8,8 @@ import {
   FaBriefcase,
   FaCheckCircle,
   FaTimesCircle,
-  FaGithub
+  FaGithub,
+  FaTelegram
 } from "react-icons/fa"
 
 export default function Portfolio() {
@@ -180,6 +181,20 @@ function ProjectCard({ project }: any) {
               className="text-teal-600 truncate dark:text-teal-400 hover:underline"
             >
               {project.url}
+            </a>
+          </div>
+        )}
+
+        {project.telegram && (
+          <div className="flex items-center text-sm">
+            <FaTelegram className="w-4 h-4 mr-2 text-teal-500" />
+            <a
+              href={`https://${project.telegram}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-teal-600 truncate dark:text-teal-400 hover:underline"
+            >
+              {project.telegram}
             </a>
           </div>
         )}

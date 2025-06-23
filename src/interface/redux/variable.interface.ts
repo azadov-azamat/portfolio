@@ -12,6 +12,7 @@ export interface PortfolioDataProps {
     owner: string,
     hash: string[],
     position: string;
+    telegram?: string;
     url: string;
     start_date: string;
     final_date: string;
