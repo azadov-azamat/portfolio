@@ -1,6 +1,5 @@
 import { OfficesDataProps, PortfolioDataProps } from "../interface/redux/variable.interface"
-import kv77 from '../assets/77kv.png' 
-import bAdvice from '../assets/b-advice.png' 
+
 
 export const portfolioData: PortfolioDataProps[] = [
     {
@@ -37,7 +36,7 @@ export const portfolioData: PortfolioDataProps[] = [
         title: "77kv",
         desc: "Loyiha realtor va agentlar uchun mo'ljallangan bo'lib, asosan turar va noturar uy joy e'lonlari joylanib boriladi. Realtorlar bemalol telegram akkountlari va olx.uz saytidagi" +
             "akkountlarini biriktirgan holda tez va qulay platformadan foydalanishadi",
-        src: kv77,
+        src: '/images/77kv.png',
         owner: "Banerma Group",
         hash: ["Ember js", "Ember Data", "Google api", "Open AI", "GPT 4", "Telegram integrate", "bootstrap", "Node Js", "Express Js", "Postgresql"],
         position: "Full-stack Developer",
@@ -113,7 +112,7 @@ export const portfolioData: PortfolioDataProps[] = [
         title: "B-Advice",
         desc: "AKTRM bo'limi tomonidan berilgan ushbu loyiha tadbirkorlarning bizneslariga maslahat, o'quv qo'llanmalar va maqolalar, turli ekspertlar bilan bog'lanish imkoniyatlari haqida platforma. " +
             "Loyihaning backend qismida jamoaviy ish olib bordim va to'liq java dasturlash tilida microservice ko'rinishda ko'tarilgan. Loyiha muvoffaqiyatli tugatilgan!",
-        src: bAdvice,
+        src: '/images/b-advice.png',
         owner: "Adliya Vazirligi",
         hash: ["java", "oop", "spring", "springboot", "microservice", "mail"],
         position: "Backend Developer",
