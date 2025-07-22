@@ -174,14 +174,21 @@ function ProjectCard({ project }: any) {
         {project.url && (
           <div className="flex items-center text-sm">
             <FaExternalLinkAlt className="w-4 h-4 mr-2 text-teal-500" />
-            <a
+            {project.url.label ? <a
+              href={project.url.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-teal-600 truncate dark:text-teal-400 hover:underline"
+            >
+              {project.url.label}
+            </a> : <a
               href={`https://${project.url}`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-teal-600 truncate dark:text-teal-400 hover:underline"
             >
               {project.url}
-            </a>
+            </a>}
           </div>
         )}
 

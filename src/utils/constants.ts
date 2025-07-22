@@ -3,6 +3,24 @@ import { OfficesDataProps, PortfolioDataProps } from "../interface/redux/variabl
 
 export const portfolioData: PortfolioDataProps[] = [
     {
+        id: 14,
+        title: "Yukon App",
+        desc: "Loyihaning asosiy maqsadi yuk va moshina egalariga kerakli bo'lgan elonlarni tez va qulay usulda topib berishdan iborat. Loyihaning web, telegram-bot va android dasturga ega sistema",
+        src: '/images/yukon-app.png',
+        owner: "Banerma Group",
+        telegram: "t.me/yuk_uz_logistika_bot",
+        hash: ["React Native", "React JS", "Google api", "Open AI", "GPT 4",  "Tailwindcss", "Redux", "Redux Toolkit"],
+        position: "Full-stack Developer",
+        url: {
+            label: "Yukon App",
+            href: "https://play.google.com/store/apps/details?id=yukon.uz.app"
+        },
+        start_date: "01/02/2025",
+        final_date: "22/07/2025",
+        status: true,
+        manager: "Begzod Hayitboyev"
+    },
+    {
         id: 12,
         title: "JDM PRO",
         desc: "Saytda yaponiya moshinalarining elonlari joylashtiriladi, saytning oldingi ko'rinishi upgrade qilindi. hosting ftp dan vercega ko'chirildi. bu bilan ishlash tezligi oshdi, email pochtaga boruvchi habarlarning dizayni o'zgartirildi, performanse va ceo to'g'irlandi va oshirildi",
@@ -19,7 +37,7 @@ export const portfolioData: PortfolioDataProps[] = [
     {
         id: 13,
         title: "Yukon Uz",
-        desc: "Loyihaning asosiy maqsadi yuk va moshina egalariga kerakli bo'lgan elonlarni telegram kanallardan tezda topib berishdan iborat. Loyiha web, telegram-bot va android app larga ega sistema",
+        desc: "Loyihaning asosiy maqsadi yuk va moshina egalariga kerakli bo'lgan elonlarni telegram kanallardan tezda topib berishdan iborat. Loyiha web, telegram-bot va android dasturga ega sistema",
         src: '/images/yukon.png',
         owner: "Banerma Group",
         telegram: "t.me/yuk_uz_logistika_bot",
