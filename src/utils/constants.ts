@@ -179,7 +179,7 @@ export const officeData: OfficesDataProps[] = [
         id: 1,
         title: "Napa Automotive",
         desc: "",
-        src: "https://it-market.uz/media-django/__sized__/logos/Logo_NAPA_Automotive-thumbnail-128x128-90.jpeg",
+        src: '/images/napa.png',
         owner: "Umid Abdusattorov"
     },
     {
@@ -187,20 +187,20 @@ export const officeData: OfficesDataProps[] = [
         title: "Davlat Xizmatlar Agentligi",
         desc: "",
         owner: "",
-        src: "https://static8.tgstat.ru/channels/_0/e0/e06c9abc54703ce47dbf2eb40538a46d.jpg"
+        src: '/images/dxa.png'
     },
     {
         id: 3,
         title: "Adliya Vazirligi (AKTRM)",
         desc: "",
-        src: "https://huquqiyportal.uz/_nuxt/img/adliya-logo.c5f976c.png",
+        src: '/images/adliya.png',
         owner: ""
     },
     {
         id: 4,
         title: "Kervanyol technologies",
         desc: "",
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDN56czZUUpMzgW4KrIGHOmRUJRJ3dZYfFhA&s",
+        src: '/images/kervanyol.png',
         owner: "",
     },
     {
