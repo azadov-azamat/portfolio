@@ -36,7 +36,6 @@ export default function Portfolio() {
       <section className="container px-4 py-16 mx-auto md:py-24">
         {/* T-Bank Project Showcase */}
         <div className="mb-20">
-          <h2 className="mb-8 text-2xl font-bold text-center text-slate-900 md:text-3xl">Proyektlar Namunasi</h2>
           <div className="flex justify-center mb-12">
             <DeviceFrame 
               type="phone" 
@@ -45,9 +44,8 @@ export default function Portfolio() {
             />
           </div>
           <div className="text-center">
-            <p className="text-slate-600 text-lg font-medium mb-2">T-Bank • T-Pay</p>
-            <p className="max-w-2xl mx-auto text-slate-600">
-              Dizayn, vayb-kodil animatsiya va muvaffaqiyatli doved loyihalarni boshqa hamda T-Banke to'lov blotus interfeysi qilingan
+            <p className="max-w-2xl mx-auto text-lg text-slate-700">
+              Frontend Developer sifatida React va web texnologiyalar bilan ishlayman. Asosan tezkor, qulay va foydalanuvchi uchun tushunarli interfeyslar yaratishga e'tibor qarataman. Murakkab vazifalarni sodda va samarali yechimlarga aylantirish hamda doimiy ravishda yangi texnologiyalarni o'rganish meni rivojlantiradi.
             </p>
           </div>
         </div>
@@ -56,9 +54,6 @@ export default function Portfolio() {
           <h1 className="mb-6 text-4xl font-bold text-transparent md:text-5xl bg-gradient-to-r from-teal-500 to-emerald-500 bg-clip-text">
             My Portfolio
           </h1>
-          <p className="max-w-2xl mx-auto text-xl text-slate-600">
-            Turli kompaniyalar va texnologiyalar bo'yicha professional ish joylarim va loyihalarimni namoyish etaman
-          </p>
         </div>
 
         {/* Ish joylari */}
@@ -167,10 +162,18 @@ function ProjectCard({ project }: any) {
       </div>
 
       <div className="px-4 pb-3 space-y-3">
-        <div className="flex items-center text-sm text-slate-700">
-          <FaUser className="w-4 h-4 mr-2 text-teal-500" />
-          <span>{project.manager}</span>
-        </div>
+              <div className="flex items-center text-sm text-slate-700">
+                <FaUser className="w-4 h-4 mr-2 text-slate-600" />
+                <span>{project.owner}</span>
+              </div>
+              <div className="flex items-center text-sm text-slate-700">
+                <FaBriefcase className="w-4 h-4 mr-2 text-slate-600" />
+                <span>{project.position}</span>
+              </div>
+              <div className="flex items-center text-sm text-slate-700">
+                <FaCalendarAlt className="w-4 h-4 mr-2 text-slate-600" />
+                <span>{project.date}</span>
+              </div>
 
         <div className="flex items-center text-sm text-slate-700">
           <FaBriefcase className="w-4 h-4 mr-2 text-teal-500" />
@@ -183,8 +186,8 @@ function ProjectCard({ project }: any) {
         </div>
 
         {project.url && (
-          <div className="flex items-center text-sm">
-            <FaExternalLinkAlt className="w-4 h-4 mr-2 text-teal-500" />
+              <div className="flex items-center text-sm">
+                <FaExternalLinkAlt className="w-4 h-4 mr-2 text-slate-600" />
             {project.url.label ? <a
               href={project.url.href}
               target="_blank"
@@ -204,8 +207,8 @@ function ProjectCard({ project }: any) {
         )}
 
         {project.telegram && (
-          <div className="flex items-center text-sm">
-            <FaTelegram className="w-4 h-4 mr-2 text-teal-500" />
+              <div className="flex items-center text-sm">
+                <FaTelegram className="w-4 h-4 mr-2 text-slate-600" />
             <a
               href={`https://${project.telegram}`}
               target="_blank"
@@ -226,7 +229,7 @@ function ProjectCard({ project }: any) {
             key={index}
             className="inline-flex items-center px-2 py-1 text-xs font-medium border rounded-md bg-slate-100 text-slate-800 border-slate-200"
           >
-            <FaTag className="w-3 h-3 mr-1" />
+            <FaTag className="w-3 h-3 mr-1 text-slate-600" />
             {tech}
           </div>
         ))}
