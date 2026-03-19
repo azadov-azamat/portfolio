@@ -1,4 +1,10 @@
+import { useI18n } from "../../../shared/i18n";
+import { getHomeContent } from "../data";
+
 export default function Footer() {
+  const { locale } = useI18n();
+  const { footer } = getHomeContent(locale);
+
   return (
     <footer
       className="px-5 py-8 border-t layer md:px-16 md:py-10 lg:px-24"
@@ -16,7 +22,7 @@ export default function Footer() {
             letterSpacing: "0.1em",
           }}
         >
-          © 2025 Azamat Azadov · React · Canvas · CSS Motion
+          {footer.signature}
         </span>
         <span
           style={{
@@ -26,7 +32,7 @@ export default function Footer() {
             letterSpacing: "0.06em",
           }}
         >
-          Toshkent, O&apos;zbekiston 🇺🇿
+          {footer.location} 🇺🇿
         </span>
       </div>
     </footer>

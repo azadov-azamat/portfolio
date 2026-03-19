@@ -1,11 +1,7 @@
+import { useI18n } from "../../../shared/i18n";
 import { officeData } from "../../../shared/data/offices";
 import { useReveal } from "../../../shared/hooks/use-reveal";
-import {
-  aboutCodeSnippet,
-  aboutDetails,
-  aboutSummary,
-  skills,
-} from "../data";
+import { getAboutCodeSnippet, getHomeContent } from "../data";
 import SectionHeading from "./section-heading";
 
 export default function About() {
@@ -13,6 +9,9 @@ export default function About() {
   const textReveal = useReveal<HTMLDivElement>();
   const skillsReveal = useReveal<HTMLDivElement>({ threshold: 0.2 });
   const codeReveal = useReveal<HTMLDivElement>();
+  const { locale } = useI18n();
+  const { about, sections, skills } = getHomeContent(locale);
+  const aboutCodeSnippet = getAboutCodeSnippet(locale);
 
   return (
     <section
@@ -24,7 +23,7 @@ export default function About() {
           ref={titleReveal.ref}
           className={`reveal reveal-left ${titleReveal.isVisible ? "is-visible" : ""}`}
         >
-          <SectionHeading label="02 — About" title="MEN" accent="HAQIMDA" />
+          <SectionHeading {...sections.about} />
         </div>
 
         <div className="grid items-start gap-8 md:grid-cols-2 md:gap-16">
@@ -43,10 +42,10 @@ export default function About() {
                 letterSpacing: "0.02em",
               }}
             >
-              {aboutSummary}
+              {about.summary}
               <br />
               <br />
-              {aboutDetails}
+              {about.details}
             </p>
 
             <div className="mobile-scroll-row mb-12 flex gap-3 md:flex-wrap md:overflow-visible md:pb-0">
@@ -105,7 +104,7 @@ export default function About() {
                       style={{
                         fontFamily: "'IBM Plex Mono',monospace",
                         fontSize: "0.62rem",
-                        color: "var(--red)",
+                        color: "var(--red-text)",
                       }}
                     >
                       {skill.pct}%

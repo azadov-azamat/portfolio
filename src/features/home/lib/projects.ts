@@ -1,13 +1,13 @@
-import type { PortfolioItem } from "../../../shared/types/content";
+import type { PortfolioItem, PortfolioRole } from "../../../shared/types/content";
 
-export type ProjectFilter = "all" | "live" | "frontend" | "backend" | "fullstack";
+export type ProjectFilter = "all" | "live" | PortfolioRole;
 
-export const projectFilters: Array<{ key: ProjectFilter; label: string }> = [
-  { key: "all", label: "Hammasi" },
-  { key: "live", label: "Active" },
-  { key: "frontend", label: "Frontend" },
-  { key: "backend", label: "Backend" },
-  { key: "fullstack", label: "Full-Stack" },
+export const projectFilterKeys: ProjectFilter[] = [
+  "all",
+  "live",
+  "frontend",
+  "backend",
+  "fullstack",
 ];
 
 export function filterProjects(
@@ -18,31 +18,15 @@ export function filterProjects(
     return projects.filter((project) => project.status);
   }
 
-  if (filter === "frontend") {
-    return projects.filter((project) => project.position.includes("Frontend"));
-  }
-
-  if (filter === "backend") {
-    return projects.filter((project) => project.position.includes("Backend"));
-  }
-
-  if (filter === "fullstack") {
-    return projects.filter((project) => project.position.includes("Full"));
+  if (filter === "frontend" || filter === "backend" || filter === "fullstack") {
+    return projects.filter((project) => project.roleKey === filter);
   }
 
   return projects;
 }
 
-export function getProjectRoleBadge(position: string): string {
-  if (position.includes("Full")) {
-    return "FULLSTACK";
-  }
-
-  if (position.includes("Front")) {
-    return "FRONTEND";
-  }
-
-  return "BACKEND";
+export function getProjectRoleBadge(roleKey: PortfolioRole): PortfolioRole {
+  return roleKey;
 }
 
 export function resolveProjectLink(project: PortfolioItem) {

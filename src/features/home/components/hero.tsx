@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
+import { useI18n } from "../../../shared/i18n";
 import { usePrefersReducedMotion } from "../../../shared/hooks/use-prefers-reduced-motion";
-import { heroDescription, heroRoles, heroStats } from "../data";
+import { getHomeContent } from "../data";
 import { HomeIcons } from "./icons";
 
 export default function Hero() {
   const [isReady, setIsReady] = useState(false);
   const [roleIndex, setRoleIndex] = useState(0);
   const [isRoleVisible, setIsRoleVisible] = useState(false);
+  const { locale } = useI18n();
   const prefersReducedMotion = usePrefersReducedMotion();
+  const { hero, heroDescription, heroRoles, heroStats } = getHomeContent(locale);
 
   useEffect(() => {
     const frameId = window.requestAnimationFrame(() => {
@@ -19,6 +22,11 @@ export default function Hero() {
       window.cancelAnimationFrame(frameId);
     };
   }, []);
+
+  useEffect(() => {
+    setRoleIndex(0);
+    setIsRoleVisible(true);
+  }, [locale]);
 
   useEffect(() => {
     if (prefersReducedMotion || heroRoles.length < 2) {
@@ -39,7 +47,7 @@ export default function Hero() {
       window.clearInterval(intervalId);
       window.clearTimeout(swapTimeout);
     };
-  }, [prefersReducedMotion]);
+  }, [heroRoles.length, locale, prefersReducedMotion]);
 
   return (
     <section
@@ -58,7 +66,7 @@ export default function Hero() {
           userSelect: "none",
         }}
       >
-        DEV
+        {hero.backgroundLabel}
       </div>
 
       <div className="mx-auto w-full max-w-6xl">
@@ -76,8 +84,8 @@ export default function Hero() {
             }`}
             style={{ transitionDelay: "120ms" }}
           >
-            <p className="section-label mb-0">Portfolio · 2025</p>
-            <span className="mobile-hero-chip">Mobile · Web · AI</span>
+            <p className="section-label mb-0">{hero.eyebrow}</p>
+            <span className="mobile-hero-chip">{hero.chip}</span>
           </div>
 
           <h1
@@ -153,7 +161,7 @@ export default function Hero() {
                 event.currentTarget.style.background = "var(--red)";
               }}
             >
-              Loyihalar <HomeIcons.arrow />
+              {hero.primaryCta} <HomeIcons.arrow />
             </a>
 
             <a
@@ -173,7 +181,7 @@ export default function Hero() {
                 event.currentTarget.style.color = "var(--gray-4)";
               }}
             >
-              Bog&apos;lanish
+              {hero.secondaryCta}
             </a>
           </div>
 
@@ -218,7 +226,7 @@ export default function Hero() {
             color: "var(--gray-3)",
           }}
         >
-          SCROLL
+          {hero.scrollLabel}
         </span>
         <div
           style={{

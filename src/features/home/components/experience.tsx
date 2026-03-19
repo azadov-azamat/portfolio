@@ -1,9 +1,12 @@
+import { useI18n } from "../../../shared/i18n";
 import { useReveal } from "../../../shared/hooks/use-reveal";
-import { experienceItems } from "../data";
+import { getHomeContent, type ExperienceItem } from "../data";
 import SectionHeading from "./section-heading";
 
 export default function Experience() {
   const titleReveal = useReveal<HTMLDivElement>();
+  const { locale } = useI18n();
+  const { experienceItems, sections } = getHomeContent(locale);
 
   return (
     <section
@@ -16,11 +19,7 @@ export default function Experience() {
           ref={titleReveal.ref}
           className={`reveal reveal-up ${titleReveal.isVisible ? "is-visible" : ""}`}
         >
-          <SectionHeading
-            label="03 — Experience"
-            title="ISH"
-            accent="TAJRIBAM"
-          />
+          <SectionHeading {...sections.experience} />
         </div>
 
         <div className="relative">
@@ -30,7 +29,7 @@ export default function Experience() {
           />
 
           {experienceItems.map((item, index) => (
-            <ExperienceItem
+            <ExperienceEntry
               key={`${item.year}-${item.company}`}
               item={item}
               index={index}
@@ -42,11 +41,11 @@ export default function Experience() {
   );
 }
 
-function ExperienceItem({
+function ExperienceEntry({
   item,
   index,
 }: {
-  item: (typeof experienceItems)[number];
+  item: ExperienceItem;
   index: number;
 }) {
   const itemReveal = useReveal<HTMLDivElement>({ threshold: 0.12 });
@@ -65,7 +64,7 @@ function ExperienceItem({
       >
         <span
           className="text-2xl font-headline"
-          style={{ color: "var(--red)" }}
+          style={{ color: "var(--red-text)" }}
         >
           {item.year}
         </span>

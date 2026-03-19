@@ -1,3 +1,5 @@
+export type PortfolioRole = "fullstack" | "frontend" | "backend";
+
 export interface ExternalLink {
   label: string;
   href: string;
@@ -11,6 +13,7 @@ export interface PortfolioItem {
   owner: string;
   hash: string[];
   position: string;
+  roleKey: PortfolioRole;
   telegram?: string;
   url: string | ExternalLink;
   startDate: string;

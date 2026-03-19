@@ -1,5 +1,6 @@
+import { useI18n } from "../../../shared/i18n";
 import { useReveal } from "../../../shared/hooks/use-reveal";
-import { socialLinks } from "../data";
+import { getHomeContent } from "../data";
 import { HomeIcons } from "./icons";
 import SectionHeading from "./section-heading";
 
@@ -12,6 +13,8 @@ const socialIcons = {
 export default function Contact() {
   const titleReveal = useReveal<HTMLDivElement>();
   const footerReveal = useReveal<HTMLDivElement>();
+  const { locale } = useI18n();
+  const { contact, sections, socialLinks } = getHomeContent(locale);
 
   return (
     <section
@@ -24,12 +27,7 @@ export default function Contact() {
           ref={titleReveal.ref}
           className={`reveal reveal-up ${titleReveal.isVisible ? "is-visible" : ""}`}
         >
-          <SectionHeading
-            label="05 — Contact"
-            title="BOG'LA"
-            accent="NISH"
-            joiner=""
-          />
+          <SectionHeading {...sections.contact} />
         </div>
 
         <p
@@ -41,8 +39,7 @@ export default function Contact() {
             letterSpacing: "0.02em",
           }}
         >
-          Yangi loyiha, hamkorlik yoki shunchaki tanishish uchun — quyidagi
-          platformalar orqali bog&apos;laning.
+          {contact.intro}
         </p>
 
         <div className="mb-12 grid grid-cols-1 gap-4 md:mb-16 md:grid-cols-3 md:gap-5">
@@ -73,7 +70,7 @@ export default function Contact() {
                   marginBottom: 2,
                 }}
               >
-                Manzil
+                {contact.locationLabel}
               </div>
               <div
                 style={{
@@ -82,7 +79,7 @@ export default function Contact() {
                   color: "var(--gray-4)",
                 }}
               >
-                Toshkent, O&apos;zbekiston 🇺🇿
+                {contact.locationValue} 🇺🇿
               </div>
             </div>
           </div>
@@ -106,7 +103,7 @@ export default function Contact() {
                 letterSpacing: "0.08em",
               }}
             >
-              Yangi loyihalarga ochiq
+              {contact.availability}
             </span>
           </div>
 
@@ -118,7 +115,7 @@ export default function Contact() {
               letterSpacing: "0.08em",
             }}
           >
-            Javob vaqti: &lt; 24 soat
+            {contact.responseTime}: {contact.responseTimeValue}
           </div>
         </div>
       </div>
@@ -130,7 +127,7 @@ function ContactCard({
   link,
   index,
 }: {
-  link: (typeof socialLinks)[number];
+  link: ReturnType<typeof getHomeContent>["socialLinks"][number];
   index: number;
 }) {
   const cardReveal = useReveal<HTMLAnchorElement>({ threshold: 0.12 });

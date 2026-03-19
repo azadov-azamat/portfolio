@@ -1,10 +1,11 @@
+import type { Locale } from "../i18n";
 import type { PortfolioItem } from "../types/content";
 
-export const portfolioData: PortfolioItem[] = [
+const basePortfolioData: PortfolioItem[] = [
   {
     id: 14,
     title: "Yukon App",
-    desc: "Loyihaning asosiy maqsadi yuk va moshina egalariga kerakli bo'lgan elonlarni tez va qulay usulda topib berishdan iborat. Loyihaning web, telegram-bot va android dasturga ega sistema",
+    desc: "",
     src: "/images/yukon-app.png",
     owner: "Banerma Group",
     telegram: "t.me/yuk_uz_logistika_bot",
@@ -18,7 +19,8 @@ export const portfolioData: PortfolioItem[] = [
       "Redux",
       "Redux Toolkit",
     ],
-    position: "Full-stack Developer",
+    position: "",
+    roleKey: "fullstack",
     url: {
       label: "Yukon App",
       href: "https://play.google.com/store/apps/details?id=yukon.uz.app&utm_source=portfolio-azamat",
@@ -31,11 +33,12 @@ export const portfolioData: PortfolioItem[] = [
   {
     id: 12,
     title: "JDM PRO",
-    desc: "Saytda yaponiya moshinalarining elonlari joylashtiriladi...",
+    desc: "",
     src: "/images/jdm.png",
     owner: "Feruz Narziev",
     hash: ["nextjs", "typescript", "tailwindcss", "strapi.io"],
-    position: "Full-stack Developer",
+    position: "",
+    roleKey: "fullstack",
     url: {
       label: "JDM PRO",
       href: "https://jdm-pro.com?utm_source=portfolio-azamat",
@@ -48,7 +51,7 @@ export const portfolioData: PortfolioItem[] = [
   {
     id: 13,
     title: "Yukon Uz",
-    desc: "Loyihaning asosiy maqsadi yuk va moshina egalariga kerakli bo'lgan elonlarni telegram kanallardan tezda topib berishdan iborat...",
+    desc: "",
     src: "/images/yukon.png",
     owner: "Banerma Group",
     telegram: "t.me/yuk_uz_logistika_bot",
@@ -64,7 +67,8 @@ export const portfolioData: PortfolioItem[] = [
       "Express Js",
       "Postgresql",
     ],
-    position: "Full-stack Developer",
+    position: "",
+    roleKey: "fullstack",
     url: {
       label: "Yukon Uz",
       href: "https://yukon.uz?utm_source=portfolio-azamat",
@@ -77,7 +81,7 @@ export const portfolioData: PortfolioItem[] = [
   {
     id: 10,
     title: "77kv",
-    desc: "Loyiha realtor va agentlar uchun mo'ljallangan...",
+    desc: "",
     src: "/images/77kv.png",
     owner: "Banerma Group",
     hash: [
@@ -92,7 +96,8 @@ export const portfolioData: PortfolioItem[] = [
       "Express Js",
       "Postgresql",
     ],
-    position: "Full-stack Developer",
+    position: "",
+    roleKey: "fullstack",
     url: {
       label: "77kv",
       href: "https://77kv.uz?utm_source=portfolio-azamat",
@@ -105,9 +110,9 @@ export const portfolioData: PortfolioItem[] = [
   {
     id: 11,
     title: "Market Lochin",
-    desc: "Qurilish mollari do'koni uchun ichki sistema...",
+    desc: "",
     src: "/images/market-lochin.png",
-    owner: "Shaxsiy loyiha",
+    owner: "",
     hash: [
       "Vite Js",
       "Redux",
@@ -115,7 +120,8 @@ export const portfolioData: PortfolioItem[] = [
       "tailwindcss",
       "material-tailwind",
     ],
-    position: "Frontend Developer",
+    position: "",
+    roleKey: "frontend",
     url: {
       label: "Market Lochin",
       href: "https://marketlochin.uz?utm_source=portfolio-azamat",
@@ -128,7 +134,7 @@ export const portfolioData: PortfolioItem[] = [
   {
     id: 3,
     title: "Depository",
-    desc: "Loyiha asosan majlislar va yig'ilishlarni online shaklda o'tkazishga xizmat qiladi...",
+    desc: "",
     src: "/images/depository.png",
     owner: "NAPA Automotive",
     hash: [
@@ -141,7 +147,8 @@ export const portfolioData: PortfolioItem[] = [
       "react-jutsu",
       "i18n",
     ],
-    position: "Frontend Developer",
+    position: "",
+    roleKey: "frontend",
     url: {
       label: "Depository",
       href: "https://evote-uz.vercel.app",
@@ -154,7 +161,7 @@ export const portfolioData: PortfolioItem[] = [
   {
     id: 9,
     title: "Topilmalar",
-    desc: "Topilmalar axborot tizimi davlat markazlari uchun...",
+    desc: "",
     src: "/images/topilmalar.png",
     owner: "Davlat Xizmatlar Agentligi",
     hash: [
@@ -165,7 +172,8 @@ export const portfolioData: PortfolioItem[] = [
       "crago",
       "eslint",
     ],
-    position: "Frontend Developer",
+    position: "",
+    roleKey: "frontend",
     url: {
       label: "Topilmalar",
       href: "https://topilmalar.davxizmat.uz?utm_source=portfolio-azamat",
@@ -178,11 +186,12 @@ export const portfolioData: PortfolioItem[] = [
   {
     id: 1,
     title: "Smart Adliya",
-    desc: "Adliya Vazirligining integratsiya platformasi...",
+    desc: "",
     src: "/images/smart-adliya.png",
     owner: "Adliya Vazirligi",
     hash: ["java", "oop", "spring", "springboot", "mail"],
-    position: "Backend Developer",
+    position: "",
+    roleKey: "backend",
     url: {
       label: "Smart Adliya",
       href: "https://smart.adliya.uz?utm_source=portfolio-azamat",
@@ -195,11 +204,12 @@ export const portfolioData: PortfolioItem[] = [
   {
     id: 2,
     title: "B-Advice",
-    desc: "Tadbirkorlar uchun maslahat platformasi...",
+    desc: "",
     src: "/images/b-advice.png",
     owner: "Adliya Vazirligi",
     hash: ["java", "oop", "spring", "springboot", "microservice", "mail"],
-    position: "Backend Developer",
+    position: "",
+    roleKey: "backend",
     url: {
       label: "B-Advice",
       href: "https://b-advice.uz?utm_source=portfolio-azamat",
@@ -212,7 +222,7 @@ export const portfolioData: PortfolioItem[] = [
   {
     id: 5,
     title: "EximERP",
-    desc: "Deklaratsiya va import jarayonlarini avtomatlashtiruvchi platforma...",
+    desc: "",
     src: "/images/eximerp.jpg",
     owner: "Kervanyul Technologies",
     hash: [
@@ -224,7 +234,8 @@ export const portfolioData: PortfolioItem[] = [
       "i18n",
       "one-id",
     ],
-    position: "Texnik yordamchi - Frontend",
+    position: "",
+    roleKey: "frontend",
     url: {
       label: "EximERP",
       href: "https://eximerp.uz?utm_source=portfolio-azamat",
@@ -235,3 +246,172 @@ export const portfolioData: PortfolioItem[] = [
     manager: "Bexruz Muzaffarov",
   },
 ];
+
+const localizedPortfolioFields: Record<
+  Locale,
+  Record<number, Pick<PortfolioItem, "desc" | "owner" | "position">>
+> = {
+  uz: {
+    14: {
+      desc: "Loyihaning asosiy maqsadi yuk va mashina egalari uchun kerakli e'lonlarni tez va qulay topib berish. Web, Telegram bot va Android ilovadan iborat platforma.",
+      owner: "Banerma Group",
+      position: "Full-Stack Developer",
+    },
+    12: {
+      desc: "Platformada Yaponiya avtomobillari e'lonlari va kataloglari joylashtiriladi.",
+      owner: "Feruz Narziev",
+      position: "Full-Stack Developer",
+    },
+    13: {
+      desc: "Yuk va transport egalari uchun Telegram kanallardagi e'lonlarni tez topib beruvchi logistika platformasi.",
+      owner: "Banerma Group",
+      position: "Full-Stack Developer",
+    },
+    10: {
+      desc: "Rieltor va agentlar uchun mo'ljallangan ko'chmas mulk platformasi.",
+      owner: "Banerma Group",
+      position: "Full-Stack Developer",
+    },
+    11: {
+      desc: "Qurilish mollari do'koni uchun ichki boshqaruv tizimi.",
+      owner: "Shaxsiy loyiha",
+      position: "Frontend Developer",
+    },
+    3: {
+      desc: "Majlislar va yig'ilishlarni onlayn tarzda o'tkazish uchun yaratilgan platforma.",
+      owner: "NAPA Automotive",
+      position: "Frontend Developer",
+    },
+    9: {
+      desc: "Davlat markazlari uchun topilmalar axborot tizimi.",
+      owner: "Davlat Xizmatlar Agentligi",
+      position: "Frontend Developer",
+    },
+    1: {
+      desc: "Adliya vazirligi uchun integratsiya platformasi.",
+      owner: "Adliya Vazirligi",
+      position: "Backend Developer",
+    },
+    2: {
+      desc: "Tadbirkorlar uchun maslahat va xizmat platformasi.",
+      owner: "Adliya Vazirligi",
+      position: "Backend Developer",
+    },
+    5: {
+      desc: "Deklaratsiya va import jarayonlarini avtomatlashtiruvchi ERP platforma.",
+      owner: "Kervanyul Technologies",
+      position: "Texnik yordamchi - Frontend",
+    },
+  },
+  en: {
+    14: {
+      desc: "A logistics platform built to help cargo owners and drivers find relevant listings quickly across web, Telegram bot, and Android.",
+      owner: "Banerma Group",
+      position: "Full-Stack Developer",
+    },
+    12: {
+      desc: "A marketplace website focused on listings and catalog content for Japanese cars.",
+      owner: "Feruz Narziev",
+      position: "Full-Stack Developer",
+    },
+    13: {
+      desc: "A logistics product that aggregates transport listings from Telegram channels and presents them in a searchable format.",
+      owner: "Banerma Group",
+      position: "Full-Stack Developer",
+    },
+    10: {
+      desc: "A real-estate platform designed for agents and brokers.",
+      owner: "Banerma Group",
+      position: "Full-Stack Developer",
+    },
+    11: {
+      desc: "An internal management system for a construction materials store.",
+      owner: "Personal project",
+      position: "Frontend Developer",
+    },
+    3: {
+      desc: "A platform for running meetings and online voting sessions.",
+      owner: "NAPA Automotive",
+      position: "Frontend Developer",
+    },
+    9: {
+      desc: "An information system for public service centers focused on found-item workflows.",
+      owner: "Public Services Agency",
+      position: "Frontend Developer",
+    },
+    1: {
+      desc: "An integration platform built for the Ministry of Justice.",
+      owner: "Ministry of Justice",
+      position: "Backend Developer",
+    },
+    2: {
+      desc: "An advisory platform created for entrepreneurs and business users.",
+      owner: "Ministry of Justice",
+      position: "Backend Developer",
+    },
+    5: {
+      desc: "An ERP platform for automating declaration and import workflows.",
+      owner: "Kervanyul Technologies",
+      position: "Frontend Support Engineer",
+    },
+  },
+  ru: {
+    14: {
+      desc: "Логистическая платформа, которая помогает владельцам грузов и водителям быстро находить нужные объявления через web, Telegram-бота и Android-приложение.",
+      owner: "Banerma Group",
+      position: "Full-Stack разработчик",
+    },
+    12: {
+      desc: "Сайт с объявлениями и каталогом японских автомобилей.",
+      owner: "Feruz Narziev",
+      position: "Full-Stack разработчик",
+    },
+    13: {
+      desc: "Логистический продукт, который собирает объявления из Telegram-каналов и делает их удобными для поиска.",
+      owner: "Banerma Group",
+      position: "Full-Stack разработчик",
+    },
+    10: {
+      desc: "Платформа недвижимости для риелторов и агентов.",
+      owner: "Banerma Group",
+      position: "Full-Stack разработчик",
+    },
+    11: {
+      desc: "Внутренняя система управления для магазина строительных материалов.",
+      owner: "Личный проект",
+      position: "Frontend разработчик",
+    },
+    3: {
+      desc: "Платформа для проведения онлайн-собраний и голосований.",
+      owner: "NAPA Automotive",
+      position: "Frontend разработчик",
+    },
+    9: {
+      desc: "Информационная система для государственных центров по работе с находками.",
+      owner: "Агентство государственных услуг",
+      position: "Frontend разработчик",
+    },
+    1: {
+      desc: "Интеграционная платформа для Министерства юстиции.",
+      owner: "Министерство юстиции",
+      position: "Backend разработчик",
+    },
+    2: {
+      desc: "Платформа консультаций и сервисов для предпринимателей.",
+      owner: "Министерство юстиции",
+      position: "Backend разработчик",
+    },
+    5: {
+      desc: "ERP-платформа для автоматизации процессов декларации и импорта.",
+      owner: "Kervanyul Technologies",
+      position: "Frontend support engineer",
+    },
+  },
+};
+
+export function getPortfolioData(locale: Locale): PortfolioItem[] {
+  return basePortfolioData.map((project) => ({
+    ...project,
+    ...localizedPortfolioFields[locale][project.id],
+  }));
+}

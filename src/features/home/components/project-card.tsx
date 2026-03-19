@@ -1,5 +1,7 @@
 import type { PortfolioItem } from "../../../shared/types/content";
+import { useI18n } from "../../../shared/i18n";
 import { useReveal } from "../../../shared/hooks/use-reveal";
+import { getHomeContent } from "../data";
 import { getProjectRoleBadge, resolveProjectLink } from "../lib/projects";
 import { HomeIcons } from "./icons";
 
@@ -10,7 +12,10 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
   const { ref, isVisible } = useReveal<HTMLDivElement>({ threshold: 0.12 });
+  const { locale } = useI18n();
+  const { projects } = getHomeContent(locale);
   const link = resolveProjectLink(project);
+  const badgeLabel = projects.badges[getProjectRoleBadge(project.roleKey)];
 
   return (
     <div
@@ -44,12 +49,12 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             className={project.status ? "status-live" : "status-arch"}
             style={{ fontFamily: "'IBM Plex Mono',monospace" }}
           >
-            {project.status ? "● LIVE" : "○ ARXIV"}
+            {project.status ? projects.live : projects.archived}
           </span>
         </div>
 
         <div className="absolute right-3 top-3">
-          <span className="tag-red">{getProjectRoleBadge(project.position)}</span>
+          <span className="tag-red">{badgeLabel}</span>
         </div>
 
         <div
@@ -77,7 +82,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${project.title} loyihasini ochish`}
+            aria-label={`${projects.openLabel}: ${project.title}`}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center border transition-all duration-200 hover:border-red-600 hover:bg-red-600 md:h-7 md:w-7"
             style={{
               borderColor: "var(--border)",
@@ -93,7 +98,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           style={{
             fontFamily: "'IBM Plex Mono',monospace",
             fontSize: "0.65rem",
-            color: "var(--red)",
+            color: "var(--red-text)",
             letterSpacing: "0.06em",
             marginBottom: 12,
           }}
@@ -179,7 +184,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           ))}
 
           {project.hash.length > 5 && (
-            <span className="tag-red" style={{ opacity: 0.4 }}>
+            <span className="tag-red" style={{ opacity: 0.65 }}>
               +{project.hash.length - 5}
             </span>
           )}
