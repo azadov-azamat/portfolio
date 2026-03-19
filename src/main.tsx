@@ -1,16 +1,17 @@
-// import React from 'react'
-import {createRoot} from 'react-dom/client'
-import App from './App.tsx'
-import {BrowserRouter} from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import { I18nProvider } from "./shared/i18n";
 
-const app = (
-    <BrowserRouter>
+const container = document.getElementById("root");
 
-            <App/>
+if (!container) {
+  throw new Error("Root container not found");
+}
 
-    </BrowserRouter>
-)
-const container = document.getElementById('root') as HTMLElement
-const root = createRoot(container)
-root.render(app)
+const root = createRoot(container);
 
+root.render(
+  <I18nProvider>
+    <App />
+  </I18nProvider>,
+);
