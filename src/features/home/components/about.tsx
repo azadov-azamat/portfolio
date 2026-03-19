@@ -58,13 +58,32 @@ export default function About() {
                     background: "var(--ink-2)",
                   }}
                 >
-                  <img
-                    src={office.src}
-                    alt={office.title}
-                    className="h-5 w-5 object-contain grayscale opacity-60"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  {office.src ? (
+                    <img
+                      src={office.src}
+                      alt={office.title}
+                      className="h-5 w-5 object-contain grayscale opacity-60"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <span
+                      aria-hidden="true"
+                      className="flex h-5 w-5 items-center justify-center rounded-sm"
+                      style={{
+                        background:
+                          office.badgeBackground ??
+                          "linear-gradient(135deg, #525252 0%, #a3a3a3 100%)",
+                        color: office.badgeColor ?? "#ffffff",
+                        fontFamily: "'IBM Plex Mono',monospace",
+                        fontSize: "0.52rem",
+                        lineHeight: 1,
+                        letterSpacing: "0.02em",
+                      }}
+                    >
+                      {office.badgeLabel ?? office.title.slice(0, 2).toUpperCase()}
+                    </span>
+                  )}
                   <span
                     style={{
                       fontFamily: "'IBM Plex Mono',monospace",

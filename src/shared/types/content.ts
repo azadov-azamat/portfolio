@@ -26,6 +26,9 @@ export interface OfficeItem {
   id: number;
   title: string;
   desc: string;
-  src: string;
+  src?: string;
   owner: string;
+  badgeLabel?: string;
+  badgeBackground?: string;
+  badgeColor?: string;
 }

@@ -3,6 +3,75 @@ import { useI18n } from "../../../shared/i18n";
 import { getHomeContent } from "../data";
 import { HomeIcons } from "./icons";
 
+type LocaleSwitcherProps = {
+  locale: ReturnType<typeof useI18n>["locale"];
+  localeOptions: ReturnType<typeof useI18n>["localeOptions"];
+  setLocale: ReturnType<typeof useI18n>["setLocale"];
+  className: string;
+  buttonClassName: string;
+  textClassName: string;
+};
+
+function LocaleSwitcher({
+  locale,
+  localeOptions,
+  setLocale,
+  className,
+  buttonClassName,
+  textClassName,
+}: LocaleSwitcherProps) {
+  const activeLocaleIndex = Math.max(
+    localeOptions.findIndex((option) => option.code === locale),
+    0,
+  );
+
+  return (
+    <div
+      className={className}
+      style={{
+        borderColor: "var(--border)",
+        background: "rgba(255,255,255,0.03)",
+        gridTemplateColumns: `repeat(${localeOptions.length}, minmax(0, 1fr))`,
+      }}
+    >
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-1 left-1 rounded-full"
+        style={{
+          width: `calc((100% - 0.5rem) / ${localeOptions.length})`,
+          transform: `translateX(${activeLocaleIndex * 100}%)`,
+          background: "var(--red)",
+          boxShadow: "0 10px 24px rgba(232, 25, 44, 0.28)",
+          transition:
+            "transform 320ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 320ms ease",
+          willChange: "transform",
+        }}
+      />
+
+      {localeOptions.map((option) => {
+        const isActive = locale === option.code;
+
+        return (
+          <button
+            key={option.code}
+            type="button"
+            onClick={() => setLocale(option.code)}
+            className={buttonClassName}
+            style={{
+              color: isActive ? "var(--white)" : "var(--gray-3)",
+              textShadow: isActive ? "0 0 14px rgba(255,255,255,0.18)" : "none",
+            }}
+            aria-label={option.nativeLabel}
+            aria-pressed={isActive}
+          >
+            <span className={textClassName}>{option.label}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function Navigation() {
   const [isReady, setIsReady] = useState(false);
   const { locale, localeOptions, setLocale } = useI18n();
@@ -50,32 +119,14 @@ export default function Navigation() {
         </div>
 
         <div className="flex items-center gap-2 md:gap-3">
-          <div
-            className="hidden items-center rounded-full border p-1 md:flex"
-            style={{
-              borderColor: "var(--border)",
-              background: "rgba(255,255,255,0.03)",
-            }}
-          >
-            {localeOptions.map((option) => (
-              <button
-                key={option.code}
-                type="button"
-                onClick={() => setLocale(option.code)}
-                className="rounded-full px-2.5 py-1 text-[0.58rem] font-mono uppercase tracking-[0.16em] transition-colors"
-                style={{
-                  background:
-                    locale === option.code ? "var(--red)" : "transparent",
-                  color:
-                    locale === option.code ? "var(--white)" : "var(--gray-3)",
-                }}
-                aria-label={option.nativeLabel}
-                aria-pressed={locale === option.code}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
+          <LocaleSwitcher
+            locale={locale}
+            localeOptions={localeOptions}
+            setLocale={setLocale}
+            className="relative hidden overflow-hidden rounded-full border p-1 md:inline-grid"
+            buttonClassName="relative z-10 rounded-full px-2.5 py-1 text-[0.58rem] font-mono uppercase tracking-[0.16em] transition-[color,text-shadow,transform] duration-300 hover:scale-[0.98]"
+            textClassName="block transition-transform duration-300"
+          />
 
           <a
             href="https://github.com/azadov-azamat"
@@ -97,32 +148,14 @@ export default function Navigation() {
             {link.label}
           </a>
         ))}
-        <div
-          className="flex shrink-0 items-center gap-1 rounded-full border px-1 py-1"
-          style={{
-            borderColor: "var(--border)",
-            background: "rgba(255,255,255,0.03)",
-          }}
-        >
-          {localeOptions.map((option) => (
-            <button
-              key={option.code}
-              type="button"
-              onClick={() => setLocale(option.code)}
-              className="rounded-full px-2 py-1 text-[0.52rem] font-mono uppercase tracking-[0.14em]"
-              style={{
-                background:
-                  locale === option.code ? "var(--red)" : "transparent",
-                color:
-                  locale === option.code ? "var(--white)" : "var(--gray-3)",
-              }}
-              aria-label={option.nativeLabel}
-              aria-pressed={locale === option.code}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
+        <LocaleSwitcher
+          locale={locale}
+          localeOptions={localeOptions}
+          setLocale={setLocale}
+          className="relative inline-grid shrink-0 overflow-hidden rounded-full border px-1 py-1"
+          buttonClassName="relative z-10 rounded-full px-2 py-1 text-[0.52rem] font-mono uppercase tracking-[0.14em] transition-[color,text-shadow,transform] duration-300 active:scale-95"
+          textClassName="block transition-transform duration-300"
+        />
       </div>
     </>
   );
