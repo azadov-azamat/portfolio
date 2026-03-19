@@ -1,7 +1,6 @@
-import { OfficesDataProps, PortfolioDataProps } from "../interface/redux/variable.interface"
+import type { PortfolioItem } from "../types/content";
 
-
-export const portfolioData: PortfolioDataProps[] = [
+export const portfolioData: PortfolioItem[] = [
   {
     id: 14,
     title: "Yukon App",
@@ -24,8 +23,8 @@ export const portfolioData: PortfolioDataProps[] = [
       label: "Yukon App",
       href: "https://play.google.com/store/apps/details?id=yukon.uz.app&utm_source=portfolio-azamat",
     },
-    start_date: "01/02/2025",
-    final_date: "22/07/2025",
+    startDate: "01/02/2025",
+    finalDate: "22/07/2025",
     status: true,
     manager: "Begzod Hayitboyev",
   },
@@ -41,8 +40,8 @@ export const portfolioData: PortfolioDataProps[] = [
       label: "JDM PRO",
       href: "https://jdm-pro.com?utm_source=portfolio-azamat",
     },
-    start_date: "01/06/2025",
-    final_date: "15/01/2025",
+    startDate: "01/06/2025",
+    finalDate: "15/01/2025",
     status: true,
     manager: "Banerma Group",
   },
@@ -70,8 +69,8 @@ export const portfolioData: PortfolioDataProps[] = [
       label: "Yukon Uz",
       href: "https://yukon.uz?utm_source=portfolio-azamat",
     },
-    start_date: "01/09/2024",
-    final_date: "01/06/2025",
+    startDate: "01/09/2024",
+    finalDate: "01/06/2025",
     status: true,
     manager: "Begzod Hayitboyev",
   },
@@ -98,8 +97,8 @@ export const portfolioData: PortfolioDataProps[] = [
       label: "77kv",
       href: "https://77kv.uz?utm_source=portfolio-azamat",
     },
-    start_date: "01/12/2023",
-    final_date: "01/06/2024",
+    startDate: "01/12/2023",
+    finalDate: "01/06/2024",
     status: true,
     manager: "Begzod Hayitboyev",
   },
@@ -121,8 +120,8 @@ export const portfolioData: PortfolioDataProps[] = [
       label: "Market Lochin",
       href: "https://marketlochin.uz?utm_source=portfolio-azamat",
     },
-    start_date: "01/09/2023",
-    final_date: "01/11/2023",
+    startDate: "01/09/2023",
+    finalDate: "01/11/2023",
     status: true,
     manager: "Jamshid Kalandarov",
   },
@@ -147,8 +146,8 @@ export const portfolioData: PortfolioDataProps[] = [
       label: "Depository",
       href: "https://evote-uz.vercel.app",
     },
-    start_date: "01/08/2021",
-    final_date: "01/01/2022",
+    startDate: "01/08/2021",
+    finalDate: "01/01/2022",
     status: false,
     manager: "Umid Abdusattorov",
   },
@@ -171,8 +170,8 @@ export const portfolioData: PortfolioDataProps[] = [
       label: "Topilmalar",
       href: "https://topilmalar.davxizmat.uz?utm_source=portfolio-azamat",
     },
-    start_date: "01/02/2022",
-    final_date: "01/01/2023",
+    startDate: "01/02/2022",
+    finalDate: "01/01/2023",
     status: true,
     manager: "Mashrab Mamatqulov",
   },
@@ -188,8 +187,8 @@ export const portfolioData: PortfolioDataProps[] = [
       label: "Smart Adliya",
       href: "https://smart.adliya.uz?utm_source=portfolio-azamat",
     },
-    start_date: "01/05/2022",
-    final_date: "01/12/2022",
+    startDate: "01/05/2022",
+    finalDate: "01/12/2022",
     manager: "Kamoliddin Xojayev",
     status: true,
   },
@@ -205,8 +204,8 @@ export const portfolioData: PortfolioDataProps[] = [
       label: "B-Advice",
       href: "https://b-advice.uz?utm_source=portfolio-azamat",
     },
-    start_date: "01/07/2022",
-    final_date: "01/12/2022",
+    startDate: "01/07/2022",
+    finalDate: "01/12/2022",
     status: true,
     manager: "Kamoliddin Xojayev",
   },
@@ -217,7 +216,6 @@ export const portfolioData: PortfolioDataProps[] = [
     src: "/images/eximerp.jpg",
     owner: "Kervanyul Technologies",
     hash: [
-      "react-js",
       "vite-js",
       "redux",
       "redux-toolkit",
@@ -231,47 +229,9 @@ export const portfolioData: PortfolioDataProps[] = [
       label: "EximERP",
       href: "https://eximerp.uz?utm_source=portfolio-azamat",
     },
-    start_date: "01/06/2023",
-    final_date: "01/09/2023",
+    startDate: "01/06/2023",
+    finalDate: "01/09/2023",
     status: true,
     manager: "Bexruz Muzaffarov",
   },
 ];
-
-export const officeData: OfficesDataProps[] = [
-    {
-        id: 1,
-        title: "Napa Automotive",
-        desc: "",
-        src: "https://it-market.uz/media-django/__sized__/logos/Logo_NAPA_Automotive-thumbnail-128x128-90.jpeg",
-        owner: "Umid Abdusattorov"
-    },
-    {
-        id: 2,
-        title: "Davlat Xizmatlar Agentligi",
-        desc: "",
-        owner: "",
-        src: "https://static8.tgstat.ru/channels/_0/e0/e06c9abc54703ce47dbf2eb40538a46d.jpg"
-    },
-    {
-        id: 3,
-        title: "Adliya Vazirligi (AKTRM)",
-        desc: "",
-        src: "https://huquqiyportal.uz/_nuxt/img/adliya-logo.c5f976c.png",
-        owner: ""
-    },
-    {
-        id: 4,
-        title: "Kervanyol technologies",
-        desc: "",
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDN56czZUUpMzgW4KrIGHOmRUJRJ3dZYfFhA&s",
-        owner: "",
-    },
-    {
-        id: 5,
-        title: "Banerma",
-        desc: "",
-        owner: "Begzod Hayitboyev",
-        src: '/images/big-tech.png'
-    }
-]

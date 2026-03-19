@@ -1,0 +1,34 @@
+export default function Footer() {
+  return (
+    <footer
+      className="px-5 py-8 border-t layer md:px-16 md:py-10 lg:px-24"
+      style={{ borderColor: "var(--border)" }}
+    >
+      <div className="mobile-panel mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-5 md:flex-row md:rounded-none md:border-0 md:bg-transparent md:px-0 md:py-0">
+        <span className="text-2xl tracking-widest font-headline">
+          AZ<span style={{ color: "var(--red)" }}>.</span>
+        </span>
+        <span
+          style={{
+            fontFamily: "'IBM Plex Mono',monospace",
+            fontSize: "0.62rem",
+            color: "var(--gray-2)",
+            letterSpacing: "0.1em",
+          }}
+        >
+          © 2025 Azamat Azadov · React · GSAP · Three.js
+        </span>
+        <span
+          style={{
+            fontFamily: "'IBM Plex Mono',monospace",
+            fontSize: "0.62rem",
+            color: "var(--gray-2)",
+            letterSpacing: "0.06em",
+          }}
+        >
+          Toshkent, O&apos;zbekiston 🇺🇿
+        </span>
+      </div>
+    </footer>
+  );
+}
