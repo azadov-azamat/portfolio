@@ -1,24 +1,26 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
+import { useEffect, useState } from "react";
 import { navLinks } from "../data";
 import { HomeIcons } from "./icons";
 
 export default function Navigation() {
-  const navRef = useRef<HTMLElement>(null);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    gsap.fromTo(
-      navRef.current,
-      { y: -40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.2 },
-    );
+    const frameId = window.requestAnimationFrame(() => {
+      setIsReady(true);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
   }, []);
 
   return (
     <>
       <nav
-        ref={navRef}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-4 layer md:px-8 md:py-5"
+        className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-4 py-4 layer transition-all duration-700 md:px-8 md:py-5 ${
+          isReady ? "translate-y-0 opacity-100" : "-translate-y-6 opacity-0"
+        }`}
         style={{
           background:
             "linear-gradient(to bottom, rgba(12,12,12,0.92) 0%, rgba(12,12,12,0.58) 55%, transparent 100%)",

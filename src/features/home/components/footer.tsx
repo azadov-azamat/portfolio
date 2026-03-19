@@ -12,17 +12,17 @@ export default function Footer() {
           style={{
             fontFamily: "'IBM Plex Mono',monospace",
             fontSize: "0.62rem",
-            color: "var(--gray-2)",
+            color: "var(--gray-3)",
             letterSpacing: "0.1em",
           }}
         >
-          © 2025 Azamat Azadov · React · GSAP · Three.js
+          © 2025 Azamat Azadov · React · Canvas · CSS Motion
         </span>
         <span
           style={{
             fontFamily: "'IBM Plex Mono',monospace",
             fontSize: "0.62rem",
-            color: "var(--gray-2)",
+            color: "var(--gray-3)",
             letterSpacing: "0.06em",
           }}
         >

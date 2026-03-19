@@ -1,6 +1,5 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
 import { officeData } from "../../../shared/data/offices";
+import { useReveal } from "../../../shared/hooks/use-reveal";
 import {
   aboutCodeSnippet,
   aboutDetails,
@@ -10,87 +9,31 @@ import {
 import SectionHeading from "./section-heading";
 
 export default function About() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const skillsRef = useRef<HTMLDivElement>(null);
-  const codeCardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const context = gsap.context(() => {
-      gsap.fromTo(
-        titleRef.current,
-        { x: -50, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: { trigger: titleRef.current, start: "top 80%" },
-        },
-      );
-
-      gsap.fromTo(
-        textRef.current,
-        { x: -30, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.7,
-          ease: "power3.out",
-          delay: 0.15,
-          scrollTrigger: { trigger: textRef.current, start: "top 80%" },
-        },
-      );
-
-      gsap.fromTo(
-        codeCardRef.current,
-        { x: 50, opacity: 0 },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: { trigger: codeCardRef.current, start: "top 80%" },
-        },
-      );
-
-      if (!skillsRef.current) {
-        return;
-      }
-
-      const bars =
-        skillsRef.current.querySelectorAll<HTMLElement>(".skill-bar-fill");
-
-      bars.forEach((bar, index) => {
-        gsap.to(bar, {
-          scaleX: Number(bar.dataset.pct ?? 0) / 100,
-          duration: 1.2,
-          ease: "power3.out",
-          delay: index * 0.08,
-          scrollTrigger: { trigger: skillsRef.current, start: "top 75%" },
-        });
-      });
-    }, sectionRef);
-
-    return () => context.revert();
-  }, []);
+  const titleReveal = useReveal<HTMLDivElement>();
+  const textReveal = useReveal<HTMLDivElement>();
+  const skillsReveal = useReveal<HTMLDivElement>({ threshold: 0.2 });
+  const codeReveal = useReveal<HTMLDivElement>();
 
   return (
     <section
       id="about"
-      ref={sectionRef}
-      className="px-5 py-24 layer md:px-16 md:py-32 lg:px-24"
+      className="content-section px-5 py-24 layer md:px-16 md:py-32 lg:px-24"
     >
       <div className="mx-auto max-w-6xl">
-        <div ref={titleRef}>
+        <div
+          ref={titleReveal.ref}
+          className={`reveal reveal-left ${titleReveal.isVisible ? "is-visible" : ""}`}
+        >
           <SectionHeading label="02 — About" title="MEN" accent="HAQIMDA" />
         </div>
 
         <div className="grid items-start gap-8 md:grid-cols-2 md:gap-16">
           <div
-            ref={textRef}
-            className="mobile-panel px-5 py-6 md:rounded-none md:border-0 md:bg-transparent md:p-0"
+            ref={textReveal.ref}
+            className={`mobile-panel px-5 py-6 reveal reveal-left md:rounded-none md:border-0 md:bg-transparent md:p-0 ${
+              textReveal.isVisible ? "is-visible" : ""
+            }`}
+            style={{ transitionDelay: "120ms" }}
           >
             <p
               className="mb-8 font-mono leading-relaxed"
@@ -120,6 +63,8 @@ export default function About() {
                     src={office.src}
                     alt={office.title}
                     className="h-5 w-5 object-contain grayscale opacity-60"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <span
                     style={{
@@ -135,8 +80,8 @@ export default function About() {
               ))}
             </div>
 
-            <div ref={skillsRef} className="space-y-4 md:space-y-5">
-              {skills.map((skill) => (
+            <div ref={skillsReveal.ref} className="space-y-4 md:space-y-5">
+              {skills.map((skill, index) => (
                 <div
                   key={skill.name}
                   className="rounded-2xl border px-4 py-4 md:rounded-none md:border-0 md:bg-transparent md:p-0"
@@ -167,14 +112,28 @@ export default function About() {
                     </span>
                   </div>
                   <div className="skill-bar">
-                    <div className="skill-bar-fill" data-pct={skill.pct} />
+                    <div
+                      className={`skill-bar-fill ${
+                        skillsReveal.isVisible ? "is-filled" : ""
+                      }`}
+                      style={{
+                        ["--skill-pct" as string]: `${skill.pct / 100}`,
+                        transitionDelay: `${index * 90}ms`,
+                      }}
+                    />
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div ref={codeCardRef} className="relative">
+          <div
+            ref={codeReveal.ref}
+            className={`relative reveal reveal-right ${
+              codeReveal.isVisible ? "is-visible" : ""
+            }`}
+            style={{ transitionDelay: "180ms" }}
+          >
             <div
               className="border p-4 font-mono text-xs leading-relaxed sm:p-5 md:p-6"
               style={{
@@ -201,7 +160,7 @@ export default function About() {
                 ))}
                 <span
                   className="ml-2"
-                  style={{ fontSize: "0.6rem", color: "var(--gray-2)" }}
+                  style={{ fontSize: "0.6rem", color: "var(--gray-3)" }}
                 >
                   azamat.config.ts
                 </span>

@@ -1,87 +1,45 @@
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
+import { useEffect, useState } from "react";
+import { usePrefersReducedMotion } from "../../../shared/hooks/use-prefers-reduced-motion";
 import { heroDescription, heroRoles, heroStats } from "../data";
 import { HomeIcons } from "./icons";
 
 export default function Hero() {
-  const lineRef = useRef<HTMLDivElement>(null);
-  const nameRef = useRef<HTMLHeadingElement>(null);
-  const roleRef = useRef<HTMLDivElement>(null);
-  const descRef = useRef<HTMLParagraphElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const backgroundLabelRef = useRef<HTMLDivElement>(null);
+  const [isReady, setIsReady] = useState(false);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isRoleVisible, setIsRoleVisible] = useState(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    const timeline = gsap.timeline({ delay: 0.4 });
-    const timeouts: number[] = [];
-    let isActive = true;
-
-    timeline
-      .fromTo(
-        lineRef.current,
-        { scaleX: 0 },
-        { scaleX: 1, duration: 0.9, ease: "power4.inOut" },
-      )
-      .fromTo(
-        nameRef.current,
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1, ease: "power3.out" },
-        "-=0.4",
-      )
-      .fromTo(
-        roleRef.current,
-        { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
-        "-=0.5",
-      )
-      .fromTo(
-        descRef.current,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
-        "-=0.4",
-      )
-      .fromTo(
-        ctaRef.current,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" },
-        "-=0.3",
-      )
-      .fromTo(
-        backgroundLabelRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 1 },
-        "-=0.3",
-      );
-
-    const timeoutId = window.setTimeout(() => {
-      let index = 0;
-
-      const animateRole = () => {
-        if (!roleRef.current || !isActive) {
-          return;
-        }
-
-        gsap.to(roleRef.current, {
-          duration: 0.6,
-          text: { value: heroRoles[index % heroRoles.length], delimiter: "" },
-          ease: "none",
-          onComplete: () => {
-            index += 1;
-            const nextTimeout = window.setTimeout(animateRole, 2200);
-            timeouts.push(nextTimeout);
-          },
-        });
-      };
-
-      animateRole();
-    }, 2400);
+    const frameId = window.requestAnimationFrame(() => {
+      setIsReady(true);
+      setIsRoleVisible(true);
+    });
 
     return () => {
-      isActive = false;
-      window.clearTimeout(timeoutId);
-      timeouts.forEach((timeout) => window.clearTimeout(timeout));
+      window.cancelAnimationFrame(frameId);
     };
   }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion || heroRoles.length < 2) {
+      setIsRoleVisible(true);
+      return;
+    }
+
+    let swapTimeout = 0;
+    const intervalId = window.setInterval(() => {
+      setIsRoleVisible(false);
+      swapTimeout = window.setTimeout(() => {
+        setRoleIndex((currentIndex) => (currentIndex + 1) % heroRoles.length);
+        setIsRoleVisible(true);
+      }, 180);
+    }, 2600);
+
+    return () => {
+      window.clearInterval(intervalId);
+      window.clearTimeout(swapTimeout);
+    };
+  }, [prefersReducedMotion]);
 
   return (
     <section
@@ -89,8 +47,9 @@ export default function Hero() {
       className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-6 pb-28 pt-24 layer sm:px-7 md:min-h-screen md:px-16 md:pb-16 md:pt-20 lg:px-24"
     >
       <div
-        ref={backgroundLabelRef}
-        className="pointer-events-none absolute right-0 top-1/2 hidden -translate-y-1/2 select-none md:block"
+        className={`pointer-events-none absolute right-0 top-1/2 hidden -translate-y-1/2 select-none transition-opacity duration-1000 md:block ${
+          isReady ? "opacity-100" : "opacity-0"
+        }`}
         style={{
           fontSize: "clamp(180px,25vw,380px)",
           fontFamily: "'Bebas Neue',sans-serif",
@@ -105,24 +64,32 @@ export default function Hero() {
       <div className="mx-auto w-full max-w-6xl">
         <div className="hero-content-shell">
           <div
-            ref={lineRef}
-            className="mb-8 origin-left md:mb-10"
+            className={`mb-8 origin-left transition-transform duration-[900ms] md:mb-10 ${
+              isReady ? "scale-x-100" : "scale-x-0"
+            }`}
             style={{ height: 2, background: "var(--red)", width: "5rem" }}
           />
 
-          <div className="mb-4 flex flex-wrap items-center gap-3">
+          <div
+            className={`mb-4 flex flex-wrap items-center gap-3 transition-all duration-700 ${
+              isReady ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
+            }`}
+            style={{ transitionDelay: "120ms" }}
+          >
             <p className="section-label mb-0">Portfolio · 2025</p>
             <span className="mobile-hero-chip">Mobile · Web · AI</span>
           </div>
 
           <h1
-            ref={nameRef}
-            className="mb-4 max-w-full font-headline"
+            className={`mb-4 max-w-full font-headline transition-all duration-1000 ${
+              isReady ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
+            }`}
             style={{
               fontSize: "clamp(2.95rem, 19vw, 9rem)",
               lineHeight: 0.9,
               color: "var(--white)",
               letterSpacing: "0.01em",
+              transitionDelay: "180ms",
             }}
           >
             AZAMAT
@@ -131,32 +98,45 @@ export default function Hero() {
           </h1>
 
           <div
-            ref={roleRef}
-            className="mb-5 min-h-[1.75rem] font-mono md:mb-6"
+            className={`mb-5 min-h-[1.75rem] font-mono transition-all duration-500 md:mb-6 ${
+              isReady ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
             style={{
               fontSize: "clamp(0.86rem,4vw,1rem)",
               color: "var(--gray-4)",
               letterSpacing: "0.08em",
+              transitionDelay: "260ms",
             }}
+            aria-live="polite"
           >
-            Full-Stack Developer
+            <span
+              className={`inline-block transition-all duration-200 ${
+                isRoleVisible ? "translate-y-0 opacity-100" : "translate-y-1 opacity-0"
+              }`}
+            >
+              {heroRoles[roleIndex]}
+            </span>
           </div>
 
           <p
-            ref={descRef}
-            className="mb-8 max-w-lg font-mono leading-relaxed md:mb-10"
+            className={`mb-8 max-w-lg font-mono leading-relaxed transition-all duration-700 md:mb-10 ${
+              isReady ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
             style={{
               fontSize: "clamp(0.78rem,3.4vw,0.82rem)",
               color: "var(--gray-3)",
               letterSpacing: "0.03em",
+              transitionDelay: "340ms",
             }}
           >
             {heroDescription}
           </p>
 
           <div
-            ref={ctaRef}
-            className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4"
+            className={`flex flex-col gap-3 transition-all duration-700 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 ${
+              isReady ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
+            style={{ transitionDelay: "420ms" }}
           >
             <a
               href="#projects"
@@ -197,7 +177,12 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="mt-10 grid grid-cols-2 gap-3 md:mt-16 md:flex md:flex-wrap md:gap-10">
+          <div
+            className={`mt-10 grid grid-cols-2 gap-3 transition-all duration-700 md:mt-16 md:flex md:flex-wrap md:gap-10 ${
+              isReady ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
+            style={{ transitionDelay: "520ms" }}
+          >
             {heroStats.map((stat) => (
               <div
                 key={stat.label}

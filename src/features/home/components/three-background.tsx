@@ -1,148 +1,139 @@
 import { useEffect, useRef } from "react";
-import * as THREE from "three";
 
 export default function ThreeBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    const context = canvas?.getContext("2d");
 
-    if (!canvas) {
+    if (!canvas || !context) {
       return;
     }
 
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: true,
-    });
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100);
-    const disposables: Array<THREE.BufferGeometry | THREE.Material> = [];
-
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.position.z = 28;
-
-    const dotCount = 800;
-    const dotPositions = new Float32Array(dotCount * 3);
-    const dotScale = new Float32Array(dotCount);
-
-    for (let index = 0; index < dotCount; index += 1) {
-      dotPositions[index * 3] = (Math.random() - 0.5) * 70;
-      dotPositions[index * 3 + 1] = (Math.random() - 0.5) * 55;
-      dotPositions[index * 3 + 2] = (Math.random() - 0.5) * 30;
-      dotScale[index] = Math.random();
-    }
-
-    const dotGeometry = new THREE.BufferGeometry();
-    dotGeometry.setAttribute("position", new THREE.BufferAttribute(dotPositions, 3));
-    dotGeometry.setAttribute("aScale", new THREE.BufferAttribute(dotScale, 1));
-
-    const dotMaterial = new THREE.ShaderMaterial({
-      vertexShader:
-        "attribute float aScale; void main(){vec4 mv=modelViewMatrix*vec4(position,1.0);gl_PointSize=aScale*2.0*(250.0/-mv.z);gl_Position=projectionMatrix*mv;}",
-      fragmentShader:
-        "void main(){float d=distance(gl_PointCoord,vec2(0.5));if(d>0.5)discard;gl_FragColor=vec4(1.0,1.0,1.0,(1.0-d*2.0)*0.18);}",
-      transparent: true,
-      depthWrite: false,
-    });
-
-    disposables.push(dotGeometry, dotMaterial);
-    scene.add(new THREE.Points(dotGeometry, dotMaterial));
-
-    const accentCount = 80;
-    const accentPositions = new Float32Array(accentCount * 3);
-
-    for (let index = 0; index < accentCount; index += 1) {
-      accentPositions[index * 3] = (Math.random() - 0.5) * 60;
-      accentPositions[index * 3 + 1] = (Math.random() - 0.5) * 45;
-      accentPositions[index * 3 + 2] = (Math.random() - 0.5) * 20;
-    }
-
-    const accentGeometry = new THREE.BufferGeometry();
-    accentGeometry.setAttribute("position", new THREE.BufferAttribute(accentPositions, 3));
-
-    const accentMaterial = new THREE.PointsMaterial({
-      color: 0xe8192c,
-      size: 0.08,
-      transparent: true,
-      opacity: 0.55,
-    });
-
-    disposables.push(accentGeometry, accentMaterial);
-    scene.add(new THREE.Points(accentGeometry, accentMaterial));
-
-    const lineMaterial = new THREE.LineBasicMaterial({
-      color: 0xffffff,
-      transparent: true,
-      opacity: 0.025,
-    });
-
-    disposables.push(lineMaterial);
-
-    for (let index = 0; index < 20; index += 1) {
-      const geometry = new THREE.BufferGeometry();
-      const vertices = new Float32Array(6);
-
-      vertices[0] = (Math.random() - 0.5) * 60;
-      vertices[1] = (Math.random() - 0.5) * 40;
-      vertices[2] = 0;
-      vertices[3] = (Math.random() - 0.5) * 60;
-      vertices[4] = (Math.random() - 0.5) * 40;
-      vertices[5] = 0;
-
-      geometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
-      scene.add(new THREE.Line(geometry, lineMaterial));
-      disposables.push(geometry);
-    }
-
-    let pointerX = 0;
-    let pointerY = 0;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const pointer = { x: 0, y: 0, active: false };
+    let width = 0;
+    let height = 0;
     let frameId = 0;
 
+    type Particle = {
+      accent: boolean;
+      size: number;
+      vx: number;
+      vy: number;
+      x: number;
+      y: number;
+    };
+
+    let particles: Particle[] = [];
+
+    const createParticles = () => {
+      const particleCount = width < 768 ? 46 : 88;
+      const accentCount = Math.max(8, Math.round(particleCount * 0.14));
+
+      particles = Array.from({ length: particleCount }, (_, index) => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * (width < 768 ? 0.16 : 0.24),
+        vy: (Math.random() - 0.5) * (width < 768 ? 0.18 : 0.26),
+        size: Math.random() * 1.8 + 0.55,
+        accent: index < accentCount,
+      }));
+    };
+
     const handleMouseMove = (event: MouseEvent) => {
-      pointerX = (event.clientX / window.innerWidth - 0.5) * 2;
-      pointerY = -(event.clientY / window.innerHeight - 0.5) * 2;
+      pointer.x = event.clientX;
+      pointer.y = event.clientY;
+      pointer.active = true;
     };
 
     const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      width = window.innerWidth;
+      height = window.innerHeight;
+
+      const pixelRatio = Math.min(window.devicePixelRatio, 1.5);
+
+      canvas.width = Math.floor(width * pixelRatio);
+      canvas.height = Math.floor(height * pixelRatio);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      createParticles();
     };
 
-    const animate = () => {
-      frameId = window.requestAnimationFrame(animate);
+    const render = () => {
+      context.clearRect(0, 0, width, height);
 
-      const positions = dotGeometry.attributes.position.array as Float32Array;
+      const pointerOffsetX = pointer.active ? (pointer.x - width / 2) * 0.008 : 0;
+      const pointerOffsetY = pointer.active ? (pointer.y - height / 2) * 0.008 : 0;
+      const connectionDistance = width < 768 ? 80 : 120;
 
-      for (let index = 0; index < dotCount; index += 1) {
-        positions[index * 3 + 1] += 0.008;
+      particles.forEach((particle, index) => {
+        if (!prefersReducedMotion) {
+          particle.x += particle.vx;
+          particle.y += particle.vy;
 
-        if (positions[index * 3 + 1] > 27.5) {
-          positions[index * 3 + 1] = -27.5;
+          if (particle.x < -24 || particle.x > width + 24) {
+            particle.vx *= -1;
+          }
+
+          if (particle.y < -24 || particle.y > height + 24) {
+            particle.vy *= -1;
+          }
         }
-      }
 
-      dotGeometry.attributes.position.needsUpdate = true;
-      camera.position.x += (pointerX * 1.2 - camera.position.x) * 0.025;
-      camera.position.y += (pointerY * 0.8 - camera.position.y) * 0.025;
-      renderer.render(scene, camera);
+        const x = particle.x + pointerOffsetX * (particle.accent ? 0.7 : 0.35);
+        const y = particle.y + pointerOffsetY * (particle.accent ? 0.7 : 0.35);
+
+        context.beginPath();
+        context.fillStyle = particle.accent
+          ? "rgba(232,25,44,0.48)"
+          : "rgba(255,255,255,0.16)";
+        context.arc(x, y, particle.size, 0, Math.PI * 2);
+        context.fill();
+
+        for (let siblingIndex = index + 1; siblingIndex < particles.length; siblingIndex += 1) {
+          const sibling = particles[siblingIndex];
+          const dx = sibling.x - particle.x;
+          const dy = sibling.y - particle.y;
+          const distance = Math.hypot(dx, dy);
+
+          if (distance > connectionDistance) {
+            continue;
+          }
+
+          context.beginPath();
+          context.strokeStyle = `rgba(255,255,255,${0.06 - distance / (connectionDistance * 20)})`;
+          context.lineWidth = sibling.accent || particle.accent ? 0.55 : 0.35;
+          context.moveTo(x, y);
+          context.lineTo(
+            sibling.x + pointerOffsetX * (sibling.accent ? 0.7 : 0.35),
+            sibling.y + pointerOffsetY * (sibling.accent ? 0.7 : 0.35),
+          );
+          context.stroke();
+        }
+      });
+
+      if (!prefersReducedMotion) {
+        frameId = window.requestAnimationFrame(render);
+      }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("resize", handleResize);
-    frameId = window.requestAnimationFrame(animate);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
+    handleResize();
+
+    if (!prefersReducedMotion) {
+      frameId = window.requestAnimationFrame(render);
+    } else {
+      render();
+    }
 
     return () => {
       window.cancelAnimationFrame(frameId);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("resize", handleResize);
-      scene.clear();
-      disposables.forEach((item) => item.dispose());
-      renderer.dispose();
     };
   }, []);
 

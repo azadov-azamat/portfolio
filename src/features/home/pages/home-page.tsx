@@ -1,6 +1,3 @@
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { TextPlugin } from "gsap/TextPlugin";
 import About from "../components/about";
 import Contact from "../components/contact";
 import Experience from "../components/experience";
@@ -10,8 +7,6 @@ import Marquee from "../components/marquee";
 import Navigation from "../components/navigation";
 import Projects from "../components/projects";
 import ThreeBackground from "../components/three-background";
-
-gsap.registerPlugin(ScrollTrigger, TextPlugin);
 
 export default function HomePage() {
   return (

@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
 import type { PortfolioItem } from "../../../shared/types/content";
+import { useReveal } from "../../../shared/hooks/use-reveal";
 import { getProjectRoleBadge, resolveProjectLink } from "../lib/projects";
 import { HomeIcons } from "./icons";
 
@@ -10,57 +9,24 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, index }: ProjectCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const { ref, isVisible } = useReveal<HTMLDivElement>({ threshold: 0.12 });
   const link = resolveProjectLink(project);
-
-  useEffect(() => {
-    gsap.fromTo(
-      cardRef.current,
-      { y: 60, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.7,
-        ease: "power3.out",
-        delay: (index % 3) * 0.1,
-        scrollTrigger: { trigger: cardRef.current, start: "top 87%" },
-      },
-    );
-  }, [index]);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    gsap.to(imageRef.current, {
-      scale: 1.07,
-      duration: 0.55,
-      ease: "power2.out",
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    gsap.to(imageRef.current, {
-      scale: 1,
-      duration: 0.45,
-      ease: "power2.inOut",
-    });
-  };
 
   return (
     <div
-      ref={cardRef}
-      className="card-editorial mobile-panel group overflow-hidden"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      ref={ref}
+      className={`card-editorial mobile-panel group overflow-hidden reveal reveal-up ${
+        isVisible ? "is-visible" : ""
+      }`}
+      style={{ transitionDelay: `${(index % 3) * 90}ms` }}
     >
       <div className="relative h-[180px] overflow-hidden md:h-[200px]">
-        <div ref={imageRef} className="h-full w-full">
+        <div className="project-card-image h-full w-full">
           <img
             src={project.src || "/placeholder.svg"}
             alt={project.title}
             loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover"
           />
         </div>
@@ -87,11 +53,8 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         </div>
 
         <div
-          className="absolute inset-0 flex items-center justify-center transition-opacity duration-300"
-          style={{
-            background: "rgba(232,25,44,0.08)",
-            opacity: isHovered ? 1 : 0,
-          }}
+          className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          style={{ background: "rgba(232,25,44,0.08)" }}
         >
           <div
             className="text-6xl font-headline"
@@ -114,6 +77,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
             href={link.href}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`${project.title} loyihasini ochish`}
             className="flex h-8 w-8 flex-shrink-0 items-center justify-center border transition-all duration-200 hover:border-red-600 hover:bg-red-600 md:h-7 md:w-7"
             style={{
               borderColor: "var(--border)",
@@ -200,7 +164,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           )}
         </div>
 
-        <p className="project-card-description mb-4 font-mono text-[0.68rem] leading-[1.7] text-[var(--gray-2)]">
+        <p className="project-card-description mb-4 font-mono text-[0.68rem] leading-[1.7] text-[var(--gray-3)]">
           {project.desc}
         </p>
 
@@ -223,10 +187,11 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       </div>
 
       <div
+        className="group-hover:scale-x-100"
         style={{
           height: 2,
           background: "var(--red)",
-          transform: isHovered ? "scaleX(1)" : "scaleX(0)",
+          transform: "scaleX(0)",
           transformOrigin: "left",
           transition: "transform 0.5s cubic-bezier(0.16,1,0.3,1)",
         }}

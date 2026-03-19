@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
 import { portfolioData } from "../../../shared/data/portfolio";
+import { useReveal } from "../../../shared/hooks/use-reveal";
 import {
   filterProjects,
   projectFilters,
@@ -11,72 +11,44 @@ import SectionHeading from "./section-heading";
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<ProjectFilter>("all");
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const tabsRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const context = gsap.context(() => {
-      gsap.fromTo(
-        titleRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: { trigger: titleRef.current, start: "top 82%" },
-        },
-      );
-
-      gsap.fromTo(
-        tabsRef.current,
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: { trigger: tabsRef.current, start: "top 85%" },
-        },
-      );
-    }, sectionRef);
-
-    return () => context.revert();
-  }, []);
+  const [isGridVisible, setIsGridVisible] = useState(true);
+  const filterTimeoutRef = useRef<number>();
+  const titleReveal = useReveal<HTMLDivElement>();
+  const tabsReveal = useReveal<HTMLDivElement>();
 
   const visibleProjects = filterProjects(portfolioData, activeFilter);
 
+  useEffect(() => {
+    return () => {
+      window.clearTimeout(filterTimeoutRef.current);
+    };
+  }, []);
+
   const handleFilterChange = (nextFilter: ProjectFilter) => {
-    if (!gridRef.current || nextFilter === activeFilter) {
+    if (nextFilter === activeFilter) {
       return;
     }
 
-    gsap.to(gridRef.current, {
-      opacity: 0,
-      y: 8,
-      duration: 0.18,
-      onComplete: () => {
-        setActiveFilter(nextFilter);
-        gsap.to(gridRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.35,
-          ease: "power3.out",
-        });
-      },
-    });
+    window.clearTimeout(filterTimeoutRef.current);
+    setIsGridVisible(false);
+    filterTimeoutRef.current = window.setTimeout(() => {
+      setActiveFilter(nextFilter);
+      window.requestAnimationFrame(() => {
+        setIsGridVisible(true);
+      });
+    }, 180);
   };
 
   return (
     <section
       id="projects"
-      ref={sectionRef}
-      className="px-5 py-24 layer md:px-16 md:py-32 lg:px-24"
+      className="content-section px-5 py-24 layer md:px-16 md:py-32 lg:px-24"
     >
       <div className="mx-auto max-w-6xl">
-        <div ref={titleRef}>
+        <div
+          ref={titleReveal.ref}
+          className={`reveal reveal-up ${titleReveal.isVisible ? "is-visible" : ""}`}
+        >
           <SectionHeading
             label="04 — Projects"
             title="LOYIHA"
@@ -86,8 +58,11 @@ export default function Projects() {
         </div>
 
         <div
-          ref={tabsRef}
-          className="mobile-scroll-row mb-8 flex gap-2 md:mb-10 md:flex-wrap md:overflow-visible md:pb-0"
+          ref={tabsReveal.ref}
+          className={`mobile-scroll-row mb-8 flex gap-2 reveal reveal-up md:mb-10 md:flex-wrap md:overflow-visible md:pb-0 ${
+            tabsReveal.isVisible ? "is-visible" : ""
+          }`}
+          style={{ transitionDelay: "120ms" }}
         >
           {projectFilters.map((filter) => (
             <button
@@ -112,8 +87,9 @@ export default function Projects() {
         </div>
 
         <div
-          ref={gridRef}
-          className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3"
+          className={`projects-grid grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 ${
+            isGridVisible ? "is-grid-visible" : "is-grid-hidden"
+          }`}
         >
           {visibleProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
