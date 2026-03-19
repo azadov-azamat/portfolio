@@ -541,6 +541,8 @@ body::after {
 .code-editor {
   display: grid;
   gap: 0.15rem;
+  min-width: 0;
+  max-width: 100%;
   overflow-x: auto;
 }
 
@@ -563,6 +565,7 @@ body::after {
   display: block;
   white-space: pre-wrap;
   word-break: break-word;
+  overflow-wrap: anywhere;
   color: #d4d4d4;
   font-size: 0.9rem;
   line-height: 1.9;
@@ -607,7 +610,7 @@ body::after {
   }
 
   .code-editor-content {
-    font-size: 0.74rem;
-    line-height: 1.8;
+    font-size: 0.7rem;
+    line-height: 1.7;
   }
 }

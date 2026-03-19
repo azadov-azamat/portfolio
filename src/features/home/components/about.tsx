@@ -26,18 +26,17 @@ export default function About() {
           <SectionHeading {...sections.about} />
         </div>
 
-        <div className="grid items-start gap-8 md:grid-cols-2 md:gap-16">
+        <div className="grid items-start gap-6 md:grid-cols-2 md:gap-16">
           <div
             ref={textReveal.ref}
-            className={`mobile-panel px-5 py-6 reveal reveal-left md:rounded-none md:border-0 md:bg-transparent md:p-0 ${
+            className={`mobile-panel min-w-0 px-5 py-6 reveal reveal-left md:rounded-none md:border-0 md:bg-transparent md:p-0 ${
               textReveal.isVisible ? "is-visible" : ""
             }`}
             style={{ transitionDelay: "120ms" }}
           >
             <p
-              className="mb-8 font-mono leading-relaxed"
+              className="mb-8 font-mono text-[0.76rem] leading-7 sm:text-[0.82rem] sm:leading-relaxed"
               style={{
-                fontSize: "0.82rem",
                 color: "var(--gray-4)",
                 letterSpacing: "0.02em",
               }}
@@ -48,11 +47,11 @@ export default function About() {
               {about.details}
             </p>
 
-            <div className="mobile-scroll-row mb-12 flex gap-3 md:flex-wrap md:overflow-visible md:pb-0">
+            <div className="mb-12 flex flex-wrap gap-3">
               {officeData.map((office) => (
                 <div
                   key={office.id}
-                  className="flex shrink-0 items-center gap-2 border px-3 py-2"
+                  className="flex max-w-full items-center gap-2 border px-3 py-2"
                   style={{
                     borderColor: "var(--border)",
                     background: "var(--ink-2)",
@@ -85,6 +84,7 @@ export default function About() {
                     </span>
                   )}
                   <span
+                    className="break-words leading-4"
                     style={{
                       fontFamily: "'IBM Plex Mono',monospace",
                       fontSize: "0.6rem",
@@ -147,13 +147,13 @@ export default function About() {
 
           <div
             ref={codeReveal.ref}
-            className={`relative reveal reveal-right ${
+            className={`relative min-w-0 reveal reveal-right ${
               codeReveal.isVisible ? "is-visible" : ""
             }`}
             style={{ transitionDelay: "180ms" }}
           >
             <div
-              className="border p-4 font-mono text-xs leading-relaxed sm:p-5 md:p-6"
+              className="overflow-hidden rounded-[28px] border p-4 font-mono text-xs leading-relaxed sm:p-5 md:rounded-none md:p-6"
               style={{
                 borderColor: "var(--border)",
                 background: "var(--ink-2)",
