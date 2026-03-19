@@ -52,7 +52,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-6 pb-28 pt-24 layer sm:px-7 md:min-h-screen md:px-16 md:pb-16 md:pt-20 lg:px-24"
+      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-6 pb-28 pt-20 layer sm:px-7 md:min-h-screen md:px-16 md:pb-16 md:pt-20 lg:px-24"
     >
       <div
         className={`pointer-events-none absolute right-0 top-1/2 hidden -translate-y-1/2 select-none transition-opacity duration-1000 md:block ${
@@ -69,7 +69,7 @@ export default function Hero() {
         {hero.backgroundLabel}
       </div>
 
-      <div className="mx-auto w-full max-w-6xl">
+      <div className="w-full max-w-6xl mx-auto">
         <div className="hero-content-shell">
           <div
             className={`mb-8 origin-left transition-transform duration-[900ms] md:mb-10 ${
@@ -84,7 +84,7 @@ export default function Hero() {
             }`}
             style={{ transitionDelay: "120ms" }}
           >
-            <p className="section-label mb-0">{hero.eyebrow}</p>
+            <p className="mb-0 section-label">{hero.eyebrow}</p>
             <span className="mobile-hero-chip">{hero.chip}</span>
           </div>
 
@@ -148,7 +148,7 @@ export default function Hero() {
           >
             <a
               href="#projects"
-              className="flex w-full items-center justify-center gap-2 px-6 py-3 font-mono text-xs tracking-widest uppercase transition-all duration-300 sm:w-auto"
+              className="flex items-center justify-center w-full gap-2 px-6 py-3 font-mono text-xs tracking-widest uppercase transition-all duration-300 sm:w-auto"
               style={{
                 background: "var(--red)",
                 color: "var(--white)",
@@ -166,7 +166,7 @@ export default function Hero() {
 
             <a
               href="#contact"
-              className="flex w-full items-center justify-center gap-2 border px-6 py-3 font-mono text-xs tracking-widest uppercase transition-all duration-300 sm:w-auto"
+              className="flex items-center justify-center w-full gap-2 px-6 py-3 font-mono text-xs tracking-widest uppercase transition-all duration-300 border sm:w-auto"
               style={{
                 borderColor: "var(--border)",
                 color: "var(--gray-4)",
@@ -215,7 +215,7 @@ export default function Hero() {
       </div>
 
       <div
-        className="absolute bottom-24 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 md:flex"
+        className="absolute flex-col items-center hidden gap-2 -translate-x-1/2 bottom-24 left-1/2 md:flex"
         style={{ opacity: 0.35 }}
       >
         <span
